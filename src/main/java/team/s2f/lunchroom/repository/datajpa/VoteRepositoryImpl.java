@@ -18,14 +18,11 @@ public class VoteRepositoryImpl implements VoteRepository {
     @Override
     @Transactional
     public Vote save(Vote vote) {
-        if (vote.getId() == null) {
-            return null;
-        }
         return voteCrud.save(vote);
     }
 
     @Override
-    public boolean delete(int id) {
-        return voteCrud.delete(id) != 0;
+    public boolean delete(int id, int userId) {
+        return voteCrud.delete(id, userId) != 0;
     }
 }

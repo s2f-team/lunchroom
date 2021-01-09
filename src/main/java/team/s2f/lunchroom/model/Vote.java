@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -31,11 +32,12 @@ public class Vote extends AbstractBaseEntity {
     private int menuId;
 
     public Vote(Integer userId, Integer restaurantId, Integer menuId) {
-        this(null, userId, restaurantId, menuId);
+        this(null, LocalDateTime.now(), userId, restaurantId, menuId);
     }
 
-    public Vote(Integer id, Integer userId, Integer restaurantId, Integer menuId) {
+    public Vote(Integer id, LocalDateTime dateTime, Integer userId, Integer restaurantId, Integer menuId) {
         super(id);
+        this.dateTime = LocalDateTime.now();
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.menuId = menuId;

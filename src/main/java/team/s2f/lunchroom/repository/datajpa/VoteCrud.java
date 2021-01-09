@@ -11,6 +11,6 @@ import team.s2f.lunchroom.model.Vote;
 public interface VoteCrud extends JpaRepository<Vote, Integer> {
     @Transactional
     @Modifying
-    @Query("delete from Vote v where v.id=:id")
-    int delete(@Param("id") int id);
+    @Query("delete from Vote v where v.id=:id and v.userId=:userId")
+    int delete(@Param("id") int id, @Param("userId") int userId);
 }

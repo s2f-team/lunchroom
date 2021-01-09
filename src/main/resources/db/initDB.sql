@@ -35,10 +35,10 @@ CREATE TABLE user_roles
 CREATE TABLE restaurants
 (
     id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
-    name    VARCHAR(50)        NOT NULL,
-    phone   VARCHAR(16) UNIQUE NOT NULL,
-    address VARCHAR(300)       NOT NULL,
-    website VARCHAR(100) UNIQUE
+    name    VARCHAR(50)  NOT NULL,
+    phone   VARCHAR(16)  NOT NULL,
+    address VARCHAR(300) NOT NULL,
+    website VARCHAR(100)
 );
 
 CREATE TABLE menu

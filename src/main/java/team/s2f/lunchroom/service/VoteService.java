@@ -27,7 +27,7 @@ public class VoteService {
         checkNotFoundWithId(voteRepository.save(vote), vote.getId());
     }
 
-    public void delete(int id) {
-        checkNotFoundWithId(voteRepository.delete(id), id);
+    public void delete(int id, int userId) {
+        checkNotFoundWithId(voteRepository.delete(id, userId), id);
     }
 }

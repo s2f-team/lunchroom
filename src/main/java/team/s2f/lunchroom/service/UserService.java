@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getByEmail(String email) {
-        return null;
+        return userRepository.getByEmail(email);
     }
 
     public List<User> getAll() {
@@ -50,6 +50,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.getByEmail(email);
+        System.out.println(user);
         if (user == null) {
             throw new UsernameNotFoundException("User with email " + email + " is not found.");
         }

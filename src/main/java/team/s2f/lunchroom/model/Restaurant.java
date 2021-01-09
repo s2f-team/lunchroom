@@ -24,7 +24,7 @@ public class Restaurant extends AbstractBaseEntity {
     @Column(name = "website")
     private String website;
 
-    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL,
+    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY, optional = false)
     @JsonBackReference
     private Menu menu;
