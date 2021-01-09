@@ -1,4 +1,4 @@
-package team.s2f.lunchroom.repository;
+package team.s2f.lunchroom.repository.datajpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

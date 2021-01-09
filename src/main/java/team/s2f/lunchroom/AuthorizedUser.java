@@ -1,32 +1,34 @@
 package team.s2f.lunchroom;
 
-import org.springframework.security.core.userdetails.User;
-import team.s2f.lunchroom.dto.UserTo;
 
-/*public class AuthorizedUser extends User {
-   *//* private static final long serialVersionUID = 1L;
+import team.s2f.lunchroom.model.User;
 
-    private UserTo userTo;
+public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
+    private static final long serialVersionUID = 1L;
+    protected User user;
+
+    /* private UserTo userTo;*/
 
     public AuthorizedUser(User user) {
-        super(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
-        this.userTo = UserUtil.asTo(user);
+        super(user.getEmail(), user.getPassword(), user.getEnabled(), true, true, true, user.getRoles());
+        /* this.userTo = UserUtil.asTo(user);*/
+        this.user = user;
     }
 
     public int getId() {
-        return userTo.id();
+        return user.getId();
     }
 
-    public void update(UserTo newTo) {
-        userTo = newTo;
+    public void update(User newUser) {
+        user = newUser;
     }
 
-    public UserTo getUserTo() {
-        return userTo;
+    public User getUser() {
+        return user;
     }
 
     @Override
     public String toString() {
-        return userTo.toString();
-    }*//*
-}*/
+        return user.toString();
+    }
+}

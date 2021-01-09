@@ -1,4 +1,4 @@
-package team.s2f.lunchroom.repository;
+package team.s2f.lunchroom.repository.datajpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,13 +11,13 @@ import java.util.List;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
     Restaurant save(Restaurant restaurant);
 
-    void delete(Integer id);
+ //   void delete(Integer id);
 
-    Restaurant getById(Integer id);
+/*    Restaurant getById(Integer id);
 
     Restaurant getByName(String name);
 
     List<Restaurant> getAll();
 
-    List<Restaurant> getActualWithMenu(LocalDate date);
+    List<Restaurant> getActualWithMenu(LocalDate date);*/
 }

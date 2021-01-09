@@ -1,4 +1,4 @@
 package team.s2f.lunchroom.dto;
 
-public class UserTo {
+public class UserTo extends BaseTo {
 }
