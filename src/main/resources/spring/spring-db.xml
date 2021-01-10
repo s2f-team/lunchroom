@@ -73,9 +73,10 @@
         </property>
     </bean>
 
+
     <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory"/>
+    p:entityManagerFactory-ref="entityManagerFactory"/>
 
     <context:component-scan base-package="team.s2f.**.repository.datajpa"/>
     <jpa:repositories base-package="team.s2f.**.repository.datajpa"/>

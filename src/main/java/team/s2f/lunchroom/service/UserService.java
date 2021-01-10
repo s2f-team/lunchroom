@@ -1,18 +1,23 @@
 package team.s2f.lunchroom.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.AuthorizedUser;
 import team.s2f.lunchroom.dto.UserTo;
 import team.s2f.lunchroom.model.User;
 import team.s2f.lunchroom.repository.UserRepository;
+import team.s2f.lunchroom.util.ValidationUtil;
 
 import java.util.List;
 
 @Service("userService")
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -38,13 +43,17 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getAll() {
-        return null;
+        return userRepository.getAll();
     }
 
+    @Transactional
     public void enable(int id, boolean enabled) {
+        User user = userRepository.getById(id);
+        user.setEnabled(enabled);
     }
 
     public void delete(int id) {
+        ValidationUtil.checkNotFoundWithId(userRepository.delete(id), id);
     }
 
     @Override

@@ -2,9 +2,9 @@ package team.s2f.lunchroom.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.User;
 import team.s2f.lunchroom.repository.UserRepository;
-import team.s2f.lunchroom.repository.datajpa.UserCrud;
 
 import java.util.List;
 
@@ -18,18 +18,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public User save(User user) {
-        return null;
+        return userCrud.save(user);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return userCrud.delete(id) != 0;
     }
 
     @Override
     public User getById(int id) {
-        return null;
+        return userCrud.findById(id).orElse(null);
     }
 
     @Override
@@ -39,11 +40,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        return null;
-    }
-
-    @Override
-    public List<User> getAllWithVotes() {
-        return null;
+        return userCrud.findAll();
     }
 }
