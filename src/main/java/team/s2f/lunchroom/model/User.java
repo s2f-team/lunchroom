@@ -1,9 +1,6 @@
 package team.s2f.lunchroom.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -44,5 +41,13 @@ public class User extends AbstractBaseEntity {
   //  @BatchSize(size = 200)
     Set<Role> roles;
 
-
+    public User(Integer id, String name, String email, String password, LocalDate registration, Boolean enabled, Set<Role> roles) {
+        super(id);
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.registration = registration;
+        this.enabled = enabled;
+        this.roles = roles;
+    }
 }
