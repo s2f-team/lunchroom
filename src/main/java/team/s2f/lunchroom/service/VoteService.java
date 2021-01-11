@@ -7,6 +7,7 @@ import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.repository.VoteRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static team.s2f.lunchroom.util.ValidationUtil.checkNotFoundWithId;
 
@@ -30,5 +31,9 @@ public class VoteService {
 
     public Vote getByUserForToday(int userId, LocalDateTime startOfDay) {
         return voteRepository.getByUserForToday(userId, startOfDay);
+    }
+
+    public List<Vote> getAll() {
+        return voteRepository.getAll();
     }
 }

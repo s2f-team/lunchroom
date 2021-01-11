@@ -59,4 +59,5 @@ public class VoteRestController {
         int userId = SecurityUtil.authUserId();
         voteService.delete(id, userId);
     }
+
 }

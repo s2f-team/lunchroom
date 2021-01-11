@@ -5,8 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import team.s2f.lunchroom.dto.RestaurantTo;
 import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.service.RestaurantService;
+import team.s2f.lunchroom.service.VoteService;
+import team.s2f.lunchroom.util.RestaurantUtil;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import java.time.LocalDate;
@@ -20,10 +23,12 @@ public class RestaurantRestController {
     private static final Logger log = getLogger(RestaurantRestController.class);
 
     private final RestaurantService restaurantService;
+    private final VoteService voteService;
 
     @Autowired
-    public RestaurantRestController(RestaurantService restaurantService) {
+    public RestaurantRestController(RestaurantService restaurantService, VoteService voteService) {
         this.restaurantService = restaurantService;
+        this.voteService = voteService;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -64,6 +69,11 @@ public class RestaurantRestController {
         log.info("Get actual restaurants with menu for today.");
         LocalDate date = LocalDate.now();
         return restaurantService.getActualWithMenu(date);
+    }
+
+    @GetMapping(value = "/votes", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<RestaurantTo> getWithVotes() {
+        return RestaurantUtil.getTos(voteService.getAll(), restaurantService.getAll());
     }
 
 }

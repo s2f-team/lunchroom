@@ -5,6 +5,7 @@ import team.s2f.lunchroom.model.Vote;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public interface VoteRepository {
@@ -14,6 +15,6 @@ public interface VoteRepository {
 
     Vote getByUserForToday(int userId, LocalDateTime startOfDay);
 
-  //  boolean checkIfExistsByUserFor
+    List<Vote> getAll();
 
 }

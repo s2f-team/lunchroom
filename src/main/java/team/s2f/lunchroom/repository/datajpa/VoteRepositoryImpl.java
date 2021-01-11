@@ -8,6 +8,7 @@ import team.s2f.lunchroom.repository.VoteRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class VoteRepositoryImpl implements VoteRepository {
@@ -32,6 +33,11 @@ public class VoteRepositoryImpl implements VoteRepository {
     @Override
     public Vote getByUserForToday(int userId, LocalDateTime startOfDay) {
         return voteCrud.getByUserForToday(userId, startOfDay);
+    }
+
+    @Override
+    public List<Vote> getAll() {
+        return voteCrud.findAll();
     }
 
 }
