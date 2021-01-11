@@ -10,6 +10,7 @@ import team.s2f.lunchroom.service.VoteService;
 import team.s2f.lunchroom.util.ValidationUtil;
 import team.s2f.lunchroom.web.SecurityUtil;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -28,13 +29,28 @@ public class VoteRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Vote create(@RequestBody Vote vote) {
+    public Vote createOrUpdate(@RequestBody Vote vote) {
         int userId = SecurityUtil.authUserId();
+        LocalDateTime today = LocalDate.now().atStartOfDay();
+
+        LocalDateTime now = LocalDateTime.now();
+        Vote existing = voteService.getByUserForToday(userId, today);
+        if (existing != null) {
+            if (now.getHour() < 11) {
+                existing.setDateTime(LocalDateTime.now());
+                existing.setMenuId(vote.getMenuId());
+                existing.setRestaurantId(vote.getRestaurantId());
+                log.info("Change vote {} by user {} for today.", vote, userId);
+                return voteService.createOrUpdate(existing);
+            } else {
+                return null;
+            }
+        }
         ValidationUtil.checkNew(vote);
         vote.setUserId(userId);
         vote.setDateTime(LocalDateTime.now());
         log.info("New vote {} by user {}.", vote, userId);
-        return voteService.create(vote);
+        return voteService.createOrUpdate(vote);
     }
 
     @DeleteMapping("/{id}")
@@ -43,4 +59,5 @@ public class VoteRestController {
         int userId = SecurityUtil.authUserId();
         voteService.delete(id, userId);
     }
+
 }

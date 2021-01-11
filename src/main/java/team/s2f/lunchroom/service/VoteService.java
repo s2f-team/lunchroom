@@ -6,6 +6,9 @@ import org.springframework.util.Assert;
 import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.repository.VoteRepository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import static team.s2f.lunchroom.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -17,17 +20,20 @@ public class VoteService {
         this.voteRepository = voteRepository;
     }
 
-    public Vote create(Vote vote) {
+    public Vote createOrUpdate(Vote vote) {
         Assert.notNull(vote, "Vote must not be null.");
         return voteRepository.save(vote);
     }
 
-    public void update(Vote vote) {
-        Assert.notNull(vote, "Vote must not be null.");
-        checkNotFoundWithId(voteRepository.save(vote), vote.getId());
-    }
-
     public void delete(int id, int userId) {
         checkNotFoundWithId(voteRepository.delete(id, userId), id);
+    }
+
+    public Vote getByUserForToday(int userId, LocalDateTime startOfDay) {
+        return voteRepository.getByUserForToday(userId, startOfDay);
+    }
+
+    public List<Vote> getAll() {
+        return voteRepository.getAll();
     }
 }
