@@ -1,17 +1,17 @@
 package team.s2f.lunchroom.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Objects;
 
 
-//Generating equals/hashCode implementation but without a call to superclass, even though this class does not extend java.lang.Object. If this is intentional, add '(callSuper=false)' to your type.
 @NoArgsConstructor
 @Getter
 @Setter
@@ -19,16 +19,20 @@ import java.util.Objects;
 @Entity
 @Table(name = "votes")
 public class Vote extends AbstractBaseEntity {
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
+    @NotNull
     private LocalDateTime dateTime;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
+    @NotNull
     private int userId;
 
-    @Column(name = "rest_id")
+    @Column(name = "rest_id", nullable = false)
+    @NotNull
     private int restaurantId;
 
-    @Column(name = "menu_id")
+    @Column(name = "menu_id", nullable = false)
+    @NotNull
     private int menuId;
 
     public Vote(Integer userId, Integer restaurantId, Integer menuId) {

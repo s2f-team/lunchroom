@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @NoArgsConstructor
 @Getter
@@ -12,16 +14,23 @@ import javax.persistence.*;
 @Table(name = "restaurants")
 public class Restaurant extends AbstractBaseEntity {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 50)
     private String name;
 
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = false)
+    @NotBlank
+    @Size(min = 10, max = 16)
     private String phone;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
+    @NotBlank
+    @Size(min = 10, max = 300)
     private String address;
 
     @Column(name = "website")
+    @Size(min = 2, max = 50)
     private String website;
 
     @OneToOne(mappedBy = "restaurant", cascade = CascadeType.PERSIST,

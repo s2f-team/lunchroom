@@ -6,8 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @NoArgsConstructor
 @Getter
@@ -16,10 +20,14 @@ import javax.persistence.*;
 @Table(name = "dishes")
 public class Dish extends AbstractBaseEntity {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
+    @NotNull
+    @Range(min = 10, max = 500)
     private Integer price;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
