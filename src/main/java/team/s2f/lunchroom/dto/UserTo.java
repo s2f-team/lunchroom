@@ -22,19 +22,4 @@ public class UserTo extends BaseTo implements HasIdAndEmail, Serializable {
         this.email = email;
         this.password = password;
     }
-
-    @Override
-    public boolean isNew() {
-        return false;
-    }
-
-    @Override
-    public int id() {
-        return 0;
-    }
-
-    @Override
-    public String getEmail() {
-        return null;
-    }
 }

@@ -17,16 +17,17 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
 @RequestMapping("rest/restaurants/votes")
-public class VoteRestController {
-    private static final Logger log = getLogger(VoteRestController.class);
+public class CommonVoteRestController {
+    private static final Logger log = getLogger(CommonVoteRestController.class);
 
     private final VoteService voteService;
 
     @Autowired
-    public VoteRestController(VoteService voteService) {
+    public CommonVoteRestController(VoteService voteService) {
         this.voteService = voteService;
     }
 
+    //Vote
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote createOrUpdate(@RequestBody Vote vote) {
@@ -53,6 +54,7 @@ public class VoteRestController {
         return voteService.createOrUpdate(vote);
     }
 
+    //Delete vote
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {

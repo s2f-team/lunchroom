@@ -6,12 +6,15 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import team.s2f.lunchroom.AuthorizedUser;
 import team.s2f.lunchroom.dto.UserTo;
 import team.s2f.lunchroom.model.User;
 import team.s2f.lunchroom.repository.UserRepository;
+import team.s2f.lunchroom.util.UserUtil;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import java.util.List;
@@ -21,25 +24,41 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public User create(UserTo userTo) {
-        return null;
+    public User create(User user) {
+        Assert.notNull(user, "user must not be null");
+        return prepareAndSave(user);
     }
 
+    public void update(User user) {
+        Assert.notNull(user, "user must not be null");
+        prepareAndSave(user);
+    }
+
+    @Transactional
     public void update(UserTo userTo) {
+        User user = get(userTo.getId());
+        prepareAndSave(UserUtil.updateFromTo(user, userTo));
     }
 
-    public UserTo getById(int id) {
-        return null;
+    public void delete(int id) {
+        ValidationUtil.checkNotFoundWithId(userRepository.delete(id), id);
+    }
+
+    public User get(int id) {
+        return ValidationUtil.checkNotFoundWithId(userRepository.getById(id), id);
     }
 
     public User getByEmail(String email) {
-        return userRepository.getByEmail(email);
+        Assert.notNull(email, "email must not be null");
+        return ValidationUtil.checkNotFound(userRepository.getByEmail(email), "email=" + email);
     }
 
     public List<User> getAll() {
@@ -52,17 +71,17 @@ public class UserService implements UserDetailsService {
         user.setEnabled(enabled);
     }
 
-    public void delete(int id) {
-        ValidationUtil.checkNotFoundWithId(userRepository.delete(id), id);
-    }
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.getByEmail(email);
+        User user = userRepository.getByEmail(email.toLowerCase());
         System.out.println(user);
         if (user == null) {
             throw new UsernameNotFoundException("User with email " + email + " is not found.");
         }
         return new AuthorizedUser(user);
+    }
+
+    private User prepareAndSave(User user) {
+        return userRepository.save(UserUtil.prepareToSave(user, passwordEncoder));
     }
 }

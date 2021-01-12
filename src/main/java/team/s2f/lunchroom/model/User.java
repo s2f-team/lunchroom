@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
+@ToString
 @Table(name = "users")
 public class User extends AbstractBaseEntity {
     @Column(name = "name")

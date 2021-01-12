@@ -31,6 +31,7 @@ public class RestaurantRestController {
         this.voteService = voteService;
     }
 
+    //Create new restaurant
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant create(@RequestBody Restaurant restaurant) {
         ValidationUtil.checkNew(restaurant);
@@ -38,6 +39,7 @@ public class RestaurantRestController {
         return restaurantService.create(restaurant);
     }
 
+    //Update restaurant by id
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
         ValidationUtil.assureIdConsistent(restaurant, id);
@@ -45,6 +47,7 @@ public class RestaurantRestController {
         restaurantService.update(restaurant);
     }
 
+    //Delete restaurant by id
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
@@ -52,18 +55,21 @@ public class RestaurantRestController {
         restaurantService.delete(id);
     }
 
+    //Get restaurant by id
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Restaurant get(@PathVariable int id) {
         log.info("Get restaurant by id {}.", id);
         return restaurantService.get(id);
     }
 
+    //Get all restaurants without menu
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll() {
         log.info("Get all restaurants.");
         return restaurantService.getAll();
     }
 
+    //Get restaurants where menu exists without menu
     @GetMapping(value = "/menu", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getActualWithMenu() {
         log.info("Get actual restaurants with menu for today.");
@@ -71,6 +77,7 @@ public class RestaurantRestController {
         return restaurantService.getActualWithMenu(date);
     }
 
+    //Get restaurantId and votes count
     @GetMapping(value = "/votes", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getWithVotes() {
         return RestaurantUtil.getTos(voteService.getAll(), restaurantService.getAll());

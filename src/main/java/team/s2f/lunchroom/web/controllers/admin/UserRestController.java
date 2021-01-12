@@ -24,11 +24,13 @@ public class UserRestController {
         this.userService = userService;
     }
 
+    //Get all users
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
         return userService.getAll();
     }
 
+    //Enable/disable user
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void enable(@PathVariable int id, @RequestParam boolean enabled) {
@@ -36,6 +38,7 @@ public class UserRestController {
         userService.enable(id, enabled);
     }
 
+    //Delete user
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
