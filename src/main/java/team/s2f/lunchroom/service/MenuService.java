@@ -32,7 +32,7 @@ public class MenuService {
         return ValidationUtil.checkNotFoundWithId(menuRepository.getByRestaurantId(restaurantId, date), restaurantId);
     }
 
-    public List<Menu> getAllWithRestaurants() {
-        return menuRepository.getAllWithRestaurant();
+    public List<Menu> getAllWithRestaurants(LocalDate date) {
+        return menuRepository.getAllWithRestaurant(date);
     }
 }
