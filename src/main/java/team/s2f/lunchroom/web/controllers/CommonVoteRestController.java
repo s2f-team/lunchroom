@@ -17,13 +17,13 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
 @RequestMapping("rest/restaurants/votes")
-public class VoteRestController {
-    private static final Logger log = getLogger(VoteRestController.class);
+public class CommonVoteRestController {
+    private static final Logger log = getLogger(CommonVoteRestController.class);
 
     private final VoteService voteService;
 
     @Autowired
-    public VoteRestController(VoteService voteService) {
+    public CommonVoteRestController(VoteService voteService) {
         this.voteService = voteService;
     }
 

@@ -3,7 +3,6 @@ package team.s2f.lunchroom.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import team.s2f.lunchroom.dto.MenuTo;
 import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.repository.MenuRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
@@ -33,7 +32,7 @@ public class MenuService {
         return ValidationUtil.checkNotFoundWithId(menuRepository.getByRestaurantId(restaurantId, date), restaurantId);
     }
 
-    public List<MenuTo> getWithRestaurantsAndRating() {
-        return null;
+    public List<Menu> getAllWithRestaurants() {
+        return menuRepository.getAllWithRestaurant();
     }
 }
