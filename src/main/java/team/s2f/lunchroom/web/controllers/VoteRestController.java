@@ -27,6 +27,7 @@ public class VoteRestController {
         this.voteService = voteService;
     }
 
+    //Vote
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote createOrUpdate(@RequestBody Vote vote) {
@@ -53,6 +54,7 @@ public class VoteRestController {
         return voteService.createOrUpdate(vote);
     }
 
+    //Delete vote
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {

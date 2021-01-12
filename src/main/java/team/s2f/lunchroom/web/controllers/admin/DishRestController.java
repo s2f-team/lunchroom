@@ -8,7 +8,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.model.Menu;
-import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.service.DishService;
 import team.s2f.lunchroom.service.MenuService;
 import team.s2f.lunchroom.service.RestaurantService;
@@ -26,31 +25,27 @@ public class DishRestController {
 
     private final DishService dishService;
     private final MenuService menuService;
-    private final RestaurantService restaurantService;
 
     @Autowired
     public DishRestController(DishService dishService, MenuService menuService, RestaurantService restaurantService) {
         this.dishService = dishService;
         this.menuService = menuService;
-        this.restaurantService = restaurantService;
     }
 
+    //Create new dish
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Dish create(@RequestBody Dish dish, @PathVariable Integer restaurantId, @PathVariable @Nullable Integer menuId) {
         ValidationUtil.checkNew(dish);
         if (menuId == 0) {
-            //  Restaurant restaurant = restaurantService.get(restaurantId);
             Menu menu = new Menu(LocalDate.now());
             log.info("Create new menu for restaurant id {} {}.", restaurantId, LocalDate.now());
             menuId = menuService.create(menu, restaurantId).getId();
-           /* restaurant.setMenu(menu);
-            restaurantService.update(restaurant);
-            System.out.println(restaurant);*/
         }
         log.info("Create new dish {} for menu {}", dish, menuId);
         return dishService.create(dish, menuId);
     }
 
+    //Update dish id {}
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody Dish dish, @PathVariable int id, @PathVariable int menuId) {
         ValidationUtil.assureIdConsistent(dish, id);
@@ -58,6 +53,7 @@ public class DishRestController {
         dishService.update(dish, menuId);
     }
 
+    //Delete dish id {}
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id, @PathVariable int menuId) {
@@ -65,17 +61,17 @@ public class DishRestController {
         dishService.delete(id, menuId);
     }
 
+    //Get dish by id and menuId
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Dish get(@PathVariable int id, @PathVariable int menuId) {
         log.info("Get dish by id {}.", id);
         return dishService.get(id, menuId);
     }
 
+    //Get all dishes by menuId
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Dish> getAllByMenuId(@PathVariable int menuId) {
         log.info("Get all dishes by menu id {}.", menuId);
         return dishService.getAllByMenuId(menuId);
     }
-
-
 }

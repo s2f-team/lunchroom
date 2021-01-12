@@ -23,12 +23,14 @@ public class MenuRestController {
         this.menuService = menuService;
     }
 
+    //Get Menu with dishes by restaurantId
     @GetMapping(value = "/{id}/menu", produces = MediaType.APPLICATION_JSON_VALUE)
     public Menu getWithDishesByRestaurantId(@PathVariable int id) {
         log.info("Get menu with dishes by restaurant id {}.", id);
         return menuService.getByRestaurant(id, LocalDate.now());
     }
 
+    //Delete menu with dishes
     @DeleteMapping("/menu/{id}")
     public void delete(@PathVariable int id) {
         log.info("Delete menu by id {}", id);
