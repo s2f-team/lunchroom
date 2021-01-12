@@ -8,6 +8,7 @@ import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.service.MenuService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -23,6 +24,13 @@ public class MenuRestController {
         this.menuService = menuService;
     }
 
+    //Delete menu with dishes
+    @DeleteMapping("/menu/{id}")
+    public void delete(@PathVariable int id) {
+        log.info("Delete menu by id {}", id);
+        menuService.delete(id);
+    }
+
     //Get Menu with dishes by restaurantId
     @GetMapping(value = "/{id}/menu", produces = MediaType.APPLICATION_JSON_VALUE)
     public Menu getWithDishesByRestaurantId(@PathVariable int id) {
@@ -30,10 +38,9 @@ public class MenuRestController {
         return menuService.getByRestaurant(id, LocalDate.now());
     }
 
-    //Delete menu with dishes
-    @DeleteMapping("/menu/{id}")
-    public void delete(@PathVariable int id) {
-        log.info("Delete menu by id {}", id);
-        menuService.delete(id);
+    //Get Menu with dishes and restaurants by date
+    @GetMapping("/menu/by")
+    public List<Menu> getAllWithRestaurantsByDate(@RequestParam String date) {
+        return menuService.getAllWithRestaurants(LocalDate.parse(date));
     }
 }

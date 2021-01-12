@@ -19,7 +19,7 @@ CREATE TABLE users
     name     VARCHAR(25)                  NOT NULL,
     email    VARCHAR(100)                 NOT NULL,
     password VARCHAR(500)                 NOT NULL,
-    date     DATE    DEFAULT CURRENT_DATE NULL,
+    date     DATE    DEFAULT CURRENT_DATE NOT NULL,
     enabled  BOOL    DEFAULT TRUE         NOT NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);

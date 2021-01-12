@@ -6,6 +6,7 @@ import lombok.*;
 import team.s2f.lunchroom.HasId;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,9 +17,9 @@ import java.util.List;
 @Entity
 @Table(name = "menu")
 public class Menu extends AbstractBaseEntity implements HasId {
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
+    @NotNull
     private LocalDate date;
-
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
     @JsonManagedReference

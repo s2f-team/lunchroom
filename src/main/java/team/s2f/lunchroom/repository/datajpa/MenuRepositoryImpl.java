@@ -46,7 +46,7 @@ public class MenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    public List<Menu> getAllWithRestaurant() {
-        return menuCrud.getAllWithRestaurant();
+    public List<Menu> getAllWithRestaurant(LocalDate date) {
+        return menuCrud.getAllWithRestaurant(date);
     }
 }

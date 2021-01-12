@@ -19,6 +19,6 @@ public interface MenuRepository {
 
     List<Menu> getAll();
 
-    List<Menu> getAllWithRestaurant();
+    List<Menu> getAllWithRestaurant(LocalDate date);
 
 }

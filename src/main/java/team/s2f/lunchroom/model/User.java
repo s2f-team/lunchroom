@@ -1,45 +1,54 @@
 package team.s2f.lunchroom.model;
 
-import lombok.*;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
 @ToString
+@Entity
 @Table(name = "users")
 public class User extends AbstractBaseEntity {
-    @Column(name = "name")
+
+    @Column(name = "name", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 25)
     String name;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
+    @NotBlank
+    @Email
+    @Size(max = 100)
     String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 100)
     String password;
 
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
+    @NotNull
     LocalDate registration;
 
-    @Column(name = "enabled")
+    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     Boolean enabled;
 
-  //  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique_idx")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SUBSELECT)
-  //  @BatchSize(size = 200)
     Set<Role> roles;
 
     public User(Integer id, String name, String email, String password, LocalDate registration, Boolean enabled, Set<Role> roles) {
