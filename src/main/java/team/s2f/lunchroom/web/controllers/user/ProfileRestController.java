@@ -16,6 +16,7 @@ import team.s2f.lunchroom.model.User;
 import team.s2f.lunchroom.service.UserService;
 import team.s2f.lunchroom.util.UserUtil;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -35,7 +36,7 @@ public class ProfileRestController {
     //Register new user
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> register(@RequestBody UserTo userTo) {
+    public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
         log.info("Create new user from to {}", userTo);
         User created = userService.create(UserUtil.createNewFromTo(userTo));
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -54,7 +55,7 @@ public class ProfileRestController {
     //doesn't work
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authUser) throws BindException {
+    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authUser) throws BindException {
         log.info("Update user to {} by user id {}.", userTo, authUser.getId());
         //переписать на валидацию
         if (userTo.getId() == authUser.getId()) {

@@ -12,6 +12,7 @@ import team.s2f.lunchroom.service.VoteService;
 import team.s2f.lunchroom.util.RestaurantUtil;
 import team.s2f.lunchroom.util.ValidationUtil;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class RestaurantRestController {
 
     //Create new restaurant
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant create(@RequestBody Restaurant restaurant) {
+    public Restaurant create(@Valid @RequestBody Restaurant restaurant) {
         ValidationUtil.checkNew(restaurant);
         log.info("Create new restaurant - {}.", restaurant);
         return restaurantService.create(restaurant);
@@ -41,7 +42,7 @@ public class RestaurantRestController {
 
     //Update restaurant by id
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
+    public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable int id) {
         ValidationUtil.assureIdConsistent(restaurant, id);
         log.info("Update restaurant {}.", restaurant);
         restaurantService.update(restaurant);
