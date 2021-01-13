@@ -30,6 +30,7 @@
 
         <!--DB-->
         <postgresql.version>42.2.17</postgresql.version>
+
         <!--    Tests  -->
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <assertj.version>3.17.2</assertj.version>
@@ -44,13 +45,6 @@
 
         <!--Cache-->
         <ehcache.version>3.9.0</ehcache.version>
-
-        <!--webjars-->
-        <webjars-bootstrap.version>4.5.3</webjars-bootstrap.version>
-        <webjars-jquery.version>3.5.1</webjars-jquery.version>
-        <webjars-datetimepicker.version>2.5.20-1</webjars-datetimepicker.version>
-        <webjars-noty.version>3.1.4</webjars-noty.version>
-        <webjars-datatables.version>1.10.21</webjars-datatables.version>
 
         <lombok.version>1.18.16</lombok.version>
     </properties>
@@ -103,7 +97,7 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
-           <!-- <scope>runtime</scope>-->
+            <!-- <scope>runtime</scope>-->
         </dependency>
 
         <!--- ORM -->
@@ -191,9 +185,49 @@
 
         <!--Test-->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${json-path.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>${spring.security.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

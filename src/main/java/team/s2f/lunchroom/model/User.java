@@ -11,6 +11,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.EnumSet;
 import java.util.Set;
 
 @Getter
@@ -50,6 +52,14 @@ public class User extends AbstractBaseEntity {
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     Set<Role> roles;
+
+    public User(User u) {
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRegistration(), u.getEnabled(), u.getRoles());
+    }
+
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, LocalDate.now(), true, EnumSet.of(role, roles));
+    }
 
     public User(Integer id, String name, String email, String password, LocalDate registration, Boolean enabled, Set<Role> roles) {
         super(id);
