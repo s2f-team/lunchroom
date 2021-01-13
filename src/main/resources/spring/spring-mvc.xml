@@ -78,7 +78,7 @@
       <constructor-arg ref="messageSource"/>
    </bean>-->
 
-   <!--<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+  <!-- <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
       <property name="defaultLocale" value="ru"/>
    </bean>
 
