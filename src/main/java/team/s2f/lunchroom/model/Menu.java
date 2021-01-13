@@ -34,10 +34,21 @@ public class Menu extends AbstractBaseEntity implements HasId {
         this(null, date, null);
     }
 
+    public Menu(LocalDate date, Restaurant restaurant) {
+        this(null, date, null, restaurant);
+    }
+
     public Menu(Integer id, LocalDate date, List<Dish> dishes) {
         super(id);
         this.date = date;
         this.dishes = dishes;
+    }
+
+    public Menu(Integer id, LocalDate date, List<Dish> dishes, Restaurant restaurant) {
+        super(id);
+        this.date = date;
+        this.dishes = dishes;
+        this.restaurant = restaurant;
     }
 
     @Override
@@ -46,6 +57,7 @@ public class Menu extends AbstractBaseEntity implements HasId {
                 "id=" + id +
                 ", date=" + date +
                 ", dishes=" + dishes +
+                ", restaurant=" + restaurant +
                 '}';
     }
 }
