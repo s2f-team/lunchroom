@@ -1,0 +1,912 @@
+{
+	"info": {
+		"_postman_id": "14b25004-e8a7-4beb-ad50-a0c5d591bac9",
+		"name": "LunchRoom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin/restaurants",
+			"item": [
+				{
+					"name": "getAll()",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById()",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create()",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"New\",\r\n    \"phone\": \"+7(000)111-22-33\",\r\n    \"address\": \"Moscow, Savelki, 15\",\r\n    \"website\": \"www.new.ru\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update()",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 100025,\r\n    \"name\": \"Hello\",\r\n    \"phone\": \"+7(000)111-22-33\",\r\n    \"address\": \"Moscow, Savelki, 15\",\r\n    \"website\": \"www.new.ru\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100025",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100025"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100025",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100025"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getActualWithMenu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/menu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"menu"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "password",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "3@mail.ru",
+						"type": "string"
+					}
+				]
+			}
+		},
+		{
+			"name": "admin/menu",
+			"item": [
+				{
+					"name": "getWithDishesByRestaurantId()",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "3@mail.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100006/menu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100006",
+								"menu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWithDishesByRestaurantId() Copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "3@mail.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/menu/by?date=2021-01-14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"menu",
+								"by"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2021-01-14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_menu",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/menu/100008",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"menu",
+								"100008"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin/dishes",
+			"item": [
+				{
+					"name": "create_dish",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Pepper\",\r\n    \"price\":150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100007/menu/0/dishes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100007",
+								"menu",
+								"0",
+								"dishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create_menu_dish",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Milk\",\r\n    \"price\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100007/menu/100026/dishes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100007",
+								"menu",
+								"100026",
+								"dishes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_menu_dish",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Chocolate milk\",\r\n    \"price\":200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100007/menu/100026/dishes/100027",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100007",
+								"menu",
+								"100026",
+								"dishes",
+								"100027"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_menu_dish",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100007/menu/100025/dishes/100027",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100007",
+								"menu",
+								"100025",
+								"dishes",
+								"100027"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_one_by_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100003/menu/100008/dishes/100012",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100003",
+								"menu",
+								"100008",
+								"dishes",
+								"100012"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_dishes_by_menu Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/100003/menu/100008/dishes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"restaurants",
+								"100003",
+								"menu",
+								"100008",
+								"dishes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin/users",
+			"item": [
+				{
+					"name": "get_all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enable",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/users/100000?enabled=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"users",
+								"100000"
+							],
+							"query": [
+								{
+									"key": "enabled",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/admin/users/100000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"admin",
+								"users",
+								"100000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test\",\r\n    \"email\": \"test@mail.ru\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/profile/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"profile",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_profile",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test@mail.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_profile",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "1@mail.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 100025,\r\n    \"name\": \"Masha\",\r\n    \"email\": \"test@mail.ru\",\r\n    \"password\": \"{bcrypt}$2a$10$Sgb47VuuXtolZ/WIayGQ7.hwELLifyulZ2AOZXYpi4lYVaxONsMOm\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_profile",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "1@mail.ru",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lunchroom/rest/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lunchroom",
+								"rest",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			}
+		},
+		{
+			"name": "Vote_admin",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "3@mail.ru",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"restaurantId\": 100003,\r\n        \"menuId\": 100008\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lunchroom/rest/restaurants/votes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lunchroom",
+						"rest",
+						"restaurants",
+						"votes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote_admin_delete",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "3@mail.ru",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/lunchroom/rest/restaurants/votes/100024",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lunchroom",
+						"rest",
+						"restaurants",
+						"votes",
+						"100024"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "votes_count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/lunchroom/rest/admin/restaurants/votes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lunchroom",
+						"rest",
+						"admin",
+						"restaurants",
+						"votes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "menu_dishes_restaurants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/lunchroom/rest/restaurants/menu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"lunchroom",
+						"rest",
+						"restaurants",
+						"menu"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "3@mail.ru",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

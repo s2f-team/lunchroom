@@ -143,3 +143,71 @@ _Get all dishes by menuId:_
 curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restaurants/100003/menu/100008/dishes' \
 --header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
 </pre>
+<br>
+
+### Admin (menus)
+
+_Delete a menu with dishes:_
+<pre>
+curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/admin/restaurants/menu/100008' \
+--header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
+
+_Get Menu with dishes by restaurantId:_
+<pre>
+curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restaurants/100006/menu' \
+--header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
+
+_Get all Menu with dishes and restaurants by date:_
+<pre>
+curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restaurants/menu/by?date=2021-01-14' \
+--header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
+<br>
+
+### Admin (users)
+
+_Enable/disable user:_
+<pre>
+curl --location --request PATCH 'http://localhost:8080/lunchroom/rest/admin/users/100000?enabled=false' \
+--header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
+
+_Delete user:_
+<pre>
+curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/admin/users/100000' \
+--header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
+
+_Get all users:_
+<pre>
+curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/users' \
+--header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
+<br>
+
+### User (profile)
+
+_Register new user:_
+<pre>
+curl --location --request POST 'http://localhost:8080/lunchroom/rest/profile/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Test",
+    "email": "test@mail.ru",
+    "password": "test1"
+}'
+</pre>
+
+_Get profile:_
+<pre>
+curl --location --request GET 'http://localhost:8080/lunchroom/rest/profile' \
+--header 'Authorization: Basic dGVzdEBtYWlsLnJ1OnRlc3Qx'
+</pre>
+
+_Delete profile:_
+<pre>
+curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/profile' \
+--header 'Authorization: Basic MUBtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
