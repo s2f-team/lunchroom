@@ -4,7 +4,7 @@ It's a REST API using Hibernate/Spring/SpringMVC that implements a voting system
 <br>
 <br>
 
-##### Common:
+### Common:
 
 _Get All Menus which includes the Restaurant and today's meals:_
 <pre>
@@ -31,7 +31,7 @@ curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/restauran
 </pre>
 <br>
 
-##### Admin (restaurants)
+### Admin (restaurants)
 
 _Create new restaurant:_
 <pre>
@@ -91,7 +91,7 @@ curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restau
 </pre>
 <br>
 
-##### Admin (dishes)
+### Admin (dishes)
 
 _Create a new dish (no menuId):_
 <pre>
