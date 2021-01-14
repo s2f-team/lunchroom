@@ -25,7 +25,13 @@ public class DishTestData {
         return new Dish(null, "New dish", 100, MenuTestData.menu_fish_house);
     }
 
+    public static Dish getNewDuplicated() {
+        return new Dish(null, dish1.getName(), 40, MenuTestData.menu_fish_house);
+    }
+
     public static Dish getUpdated() {
         return new Dish(DISH1_ID, "Updated Fish", 100, MenuTestData.menu_fish_house);
     }
+
+    public static List<Dish> getAllByMenu = List.of(dish1, dish2, dish3);
 }
