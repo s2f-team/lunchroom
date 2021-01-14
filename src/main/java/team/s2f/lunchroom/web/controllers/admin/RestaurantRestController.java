@@ -63,7 +63,7 @@ public class RestaurantRestController {
         return restaurantService.get(id);
     }
 
-    //Get all restaurants without menu
+    //Get restaurant by id
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Restaurant> getAll() {
         log.info("Get all restaurants.");
