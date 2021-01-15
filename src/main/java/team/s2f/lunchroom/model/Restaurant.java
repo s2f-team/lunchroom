@@ -33,22 +33,16 @@ public class Restaurant extends AbstractBaseEntity {
     @Size(min = 2, max = 50)
     private String website;
 
-    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.PERSIST,
-            fetch = FetchType.LAZY, optional = false)
-    @JsonBackReference
-    private Menu menu;
-
     public Restaurant(String name, String phone, String address, String website) {
-        this(null, name, phone, address, website, null);
+        this(null, name, phone, address, website);
     }
 
-    public Restaurant(Integer id, String name, String phone, String address, String website, Menu menu) {
+    public Restaurant(Integer id, String name, String phone, String address, String website) {
         super(id);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.website = website;
-        this.menu = menu;
     }
 
     @Override

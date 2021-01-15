@@ -1,8 +1,9 @@
 package team.s2f.lunchroom.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import team.s2f.lunchroom.HasId;
 
 import javax.persistence.*;
@@ -25,9 +26,8 @@ public class Menu extends AbstractBaseEntity implements HasId {
     @JsonManagedReference
     private List<Dish> dishes;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "rest_id")
-    @JsonManagedReference
     private Restaurant restaurant;
 
     public Menu(LocalDate date) {

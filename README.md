@@ -78,12 +78,6 @@ curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restau
 --header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
 </pre>
 
-_Get restaurants where menu exists for today (without a menu):_
-<pre>
-curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restaurants/menu' \
---header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
-</pre>
-
 _Get restaurantId and votes count:_
 <pre>
 curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restaurants/votes' \
