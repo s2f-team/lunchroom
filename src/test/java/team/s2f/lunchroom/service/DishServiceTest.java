@@ -9,6 +9,8 @@ import team.s2f.lunchroom.MenuTestData;
 import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.util.exception.NotFoundException;
 
+import javax.validation.ConstraintViolationException;
+
 public class DishServiceTest extends AbstractServiceTest {
 
     @Autowired
@@ -80,7 +82,12 @@ public class DishServiceTest extends AbstractServiceTest {
         DishTestData.DISH_MATCHER.assertMatch(dishService.getAllByMenuId(MenuTestData.menu_fish_house.id()), DishTestData.getAllByMenu);
     }
 
+    @Test
     void createWithException() {
-
+        validateRootCause(() -> dishService.create(new Dish(null, " ", 100, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, null, 100, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 3, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 550, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 550, null), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
     }
 }
