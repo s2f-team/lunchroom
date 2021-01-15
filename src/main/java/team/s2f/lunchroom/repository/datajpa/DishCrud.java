@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Dish;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -19,6 +20,9 @@ public interface DishCrud extends JpaRepository<Dish, Integer> {
 
     @Query("select d from Dish d where d.id=:id and d.menu.id=:menuId")
     Dish findById(@Param("id") int id, @Param("menuId") int menuId);
+
+    @Query("select d from Dish d where d.name=:name and d.menu.id=:id")
+    Dish getByNameForMenu(@Param("name") String name, @Param("id") int menuId);
 
     @Query("select d from Dish d where d.menu.id=:menuId order by d.id")
     List<Dish> getAll(@Param("menuId") int menuId);

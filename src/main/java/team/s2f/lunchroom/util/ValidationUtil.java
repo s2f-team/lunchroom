@@ -1,6 +1,7 @@
 package team.s2f.lunchroom.util;
 
 import org.slf4j.Logger;
+import org.springframework.dao.DataAccessException;
 import team.s2f.lunchroom.HasId;
 import team.s2f.lunchroom.util.exception.ErrorType;
 import team.s2f.lunchroom.util.exception.IllegalRequestDataException;
@@ -55,6 +56,17 @@ public class ValidationUtil {
     public static void checkNew(HasId bean) {
         if (!bean.isNew()) {
             throw new IllegalRequestDataException(bean + " must be new (id=null)");
+        }
+    }
+
+    public static void checkNameIsUniqueForMenu(boolean isFoundInDb) {
+        if (isFoundInDb) {
+            throw new DataAccessException("Dish name is not unique for this menu.") {
+                @Override
+                public String getMessage() {
+                    return super.getMessage();
+                }
+            };
         }
     }
 

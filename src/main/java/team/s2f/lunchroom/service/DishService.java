@@ -1,14 +1,12 @@
 package team.s2f.lunchroom.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.repository.DishRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -22,6 +20,7 @@ public class DishService {
 
     public Dish create(Dish dish, int menuId) {
         Assert.notNull(dish, "Dish must not be null.");
+        ValidationUtil.checkNameIsUniqueForMenu(dishRepository.getByNameForMenu(dish.getName(), menuId) != null);
         return dishRepository.save(dish, menuId);
     }
 
