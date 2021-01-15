@@ -21,9 +21,8 @@ public class MenuRepositoryImpl implements MenuRepository {
     }
 
     @Override
-    @Transactional
     public Menu create(Menu menu, int restaurantId) {
-        if (!menu.isNew()){
+        if (!menu.isNew()) {
             return null;
         }
         menu.setRestaurant(restaurantCrud.getOne(restaurantId));
@@ -33,6 +32,11 @@ public class MenuRepositoryImpl implements MenuRepository {
     @Override
     public boolean delete(int id) {
         return menuCrud.delete(id) != 0;
+    }
+
+    @Override
+    public Menu getById(int id) {
+        return menuCrud.findById(id).orElse(null);
     }
 
     @Override

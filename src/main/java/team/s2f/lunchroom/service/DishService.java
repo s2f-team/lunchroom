@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.model.Dish;
+import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.repository.DishRepository;
+import team.s2f.lunchroom.repository.MenuRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import java.util.List;
@@ -12,10 +14,12 @@ import java.util.List;
 @Service
 public class DishService {
     private final DishRepository dishRepository;
+    private final MenuRepository menuRepository;
 
     @Autowired
-    public DishService(DishRepository dishRepository) {
+    public DishService(DishRepository dishRepository, MenuRepository menuRepository) {
         this.dishRepository = dishRepository;
+        this.menuRepository = menuRepository;
     }
 
     public Dish create(Dish dish, int menuId) {
@@ -38,6 +42,7 @@ public class DishService {
     }
 
     public List<Dish> getAllByMenuId(int menuId) {
+        ValidationUtil.checkNotFoundWithId(menuRepository.getById(menuId), menuId);
         return dishRepository.getAllByMenu(menuId);
     }
 }

@@ -64,6 +64,11 @@ public class DishServiceTest extends AbstractServiceTest {
     }
 
     @Test
+    void getWithNotFoundMenu() {
+        Assertions.assertThrows(NotFoundException.class, () -> dishService.get(DishTestData.DISH1_ID, MenuTestData.NOT_FOUND));
+    }
+
+    @Test
     void update() {
         Dish updated = DishTestData.getUpdated();
         dishService.update(updated, MenuTestData.menu_fish_house.id());
@@ -80,6 +85,11 @@ public class DishServiceTest extends AbstractServiceTest {
     @Test
     void getAllByMenu() {
         DishTestData.DISH_MATCHER.assertMatch(dishService.getAllByMenuId(MenuTestData.menu_fish_house.id()), DishTestData.getAllByMenu);
+    }
+
+    @Test
+    void getAllByIncorrectMenu() {
+        Assertions.assertThrows(NotFoundException.class, () -> dishService.getAllByMenuId(MenuTestData.NOT_FOUND));
     }
 
     @Test
