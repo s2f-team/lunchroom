@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.repository.DishRepository;
-import team.s2f.lunchroom.repository.MenuRepository;
 
 import java.util.List;
 
@@ -31,14 +30,20 @@ public class DishRepositoryImpl implements DishRepository {
     }
 
     @Override
+    public boolean delete(int id, int menuId) {
+        return dishCrud.delete(id, menuId) != 0;
+    }
+
+    @Override
     public Dish get(int id, int menuId) {
         return dishCrud.findById(id, menuId);
     }
 
     @Override
-    public boolean delete(int id, int menuId) {
-        return dishCrud.delete(id, menuId) != 0;
+    public Dish getByNameForMenu(String name, int menuId) {
+        return dishCrud.getByNameForMenu(name, menuId);
     }
+
 
     @Override
     public List<Dish> getAllByMenu(int menuId) {
