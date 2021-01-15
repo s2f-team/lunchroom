@@ -70,18 +70,9 @@ public class RestaurantRestController {
         return restaurantService.getAll();
     }
 
-    //Get restaurants where menu exists without menu
-    @GetMapping(value = "/menu", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Restaurant> getActualWithMenu() {
-        log.info("Get actual restaurants with menu for today.");
-        LocalDate date = LocalDate.now();
-        return restaurantService.getActualWithMenu(date);
-    }
-
     //Get restaurantId and votes count
     @GetMapping(value = "/votes", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getWithVotes() {
         return RestaurantUtil.getTos(voteService.getAll(), restaurantService.getAll());
     }
-
 }

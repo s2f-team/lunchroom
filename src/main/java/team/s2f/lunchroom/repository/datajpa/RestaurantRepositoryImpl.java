@@ -49,9 +49,4 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     public List<Restaurant> getAll() {
         return restaurantCrud.findAll();
     }
-
-    @Override
-    public List<Restaurant> getActualWithMenu(LocalDate date) {
-        return restaurantCrud.getActualWithMenu(date);
-    }
 }

@@ -45,7 +45,7 @@ public class RestaurantService {
         return repository.getAll();
     }
 
-    public List<Restaurant> getActualWithMenu(LocalDate date) {
+   /* public List<Restaurant> getActualWithMenu(LocalDate date) {
         return repository.getActualWithMenu(date);
-    }
+    }*/
 }

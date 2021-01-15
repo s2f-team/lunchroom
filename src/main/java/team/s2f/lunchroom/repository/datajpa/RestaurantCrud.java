@@ -18,9 +18,6 @@ public interface RestaurantCrud extends JpaRepository<Restaurant, Integer> {
     @Query("select r from Restaurant r where r.name=:name")
     Restaurant getByName(@Param("name") String name);
 
-    @Query("select r from Restaurant r join fetch r.menu where r.menu.date=:date")
-    List<Restaurant> getActualWithMenu(@Param("date") LocalDate date);
-
     @Transactional
     @Modifying
     @Query("delete from Restaurant r where r.id=:id")
