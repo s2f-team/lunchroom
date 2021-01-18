@@ -28,10 +28,6 @@ public class RestaurantService {
         return ValidationUtil.checkNotFoundWithId(repository.getById(id), id);
     }
 
-    public Restaurant getOne(int id){
-        return repository.getOne(id);
-    }
-
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "Restaurant must not be null.");
         ValidationUtil.checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
@@ -44,8 +40,4 @@ public class RestaurantService {
     public List<Restaurant> getAll() {
         return repository.getAll();
     }
-
-   /* public List<Restaurant> getActualWithMenu(LocalDate date) {
-        return repository.getActualWithMenu(date);
-    }*/
 }
