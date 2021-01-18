@@ -30,7 +30,7 @@ public class Restaurant extends AbstractBaseEntity {
     private String address;
 
     @Column(name = "website")
-    @Size(min = 2, max = 50)
+    @Size(min = 4, max = 50)
     private String website;
 
     public Restaurant(String name, String phone, String address, String website) {

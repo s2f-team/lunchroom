@@ -41,11 +41,6 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public Restaurant getByName(String name) {
-        return restaurantCrud.getByName(name);
-    }
-
-    @Override
     public List<Restaurant> getAll() {
         return restaurantCrud.findAll();
     }
