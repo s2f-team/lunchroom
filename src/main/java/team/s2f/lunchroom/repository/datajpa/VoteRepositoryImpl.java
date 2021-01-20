@@ -31,8 +31,13 @@ public class VoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
+    public Vote get(int id, int userId) {
+        return voteCrud.findByIdAndUserId(id, userId).orElse(null);
+    }
+
+    @Override
     public Vote getByUserForToday(int userId, LocalDateTime startOfDay) {
-        return voteCrud.getByUserForToday(userId, startOfDay);
+        return voteCrud.getByUserForToday(userId, startOfDay).orElse(null);
     }
 
     @Override

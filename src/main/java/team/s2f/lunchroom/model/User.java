@@ -1,5 +1,6 @@
 package team.s2f.lunchroom.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,10 +38,12 @@ public class User extends AbstractBaseEntity {
     @Column(name = "password", nullable = false)
     @NotBlank
     @Size(min = 5, max = 100)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
     @Column(name = "date", nullable = false)
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     LocalDate registration;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
