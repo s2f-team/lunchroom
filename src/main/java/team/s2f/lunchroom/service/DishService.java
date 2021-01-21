@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.model.Dish;
-import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.repository.DishRepository;
 import team.s2f.lunchroom.repository.MenuRepository;
 import team.s2f.lunchroom.util.ValidationUtil;

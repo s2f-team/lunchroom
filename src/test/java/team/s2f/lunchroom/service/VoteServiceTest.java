@@ -11,7 +11,6 @@ import team.s2f.lunchroom.util.VoteUtil;
 import team.s2f.lunchroom.util.exception.ApplicationException;
 import team.s2f.lunchroom.util.exception.NotFoundException;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class VoteServiceTest extends AbstractServiceTest {

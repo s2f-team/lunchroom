@@ -2,7 +2,6 @@ package team.s2f.lunchroom.repository;
 
 import team.s2f.lunchroom.model.Dish;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface DishRepository {

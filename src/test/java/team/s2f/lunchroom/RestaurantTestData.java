@@ -1,6 +1,5 @@
 package team.s2f.lunchroom;
 
-import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.model.Restaurant;
 
 import java.util.List;

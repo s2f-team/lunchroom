@@ -1,10 +1,7 @@
 package team.s2f.lunchroom.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.repository.MenuRepository;

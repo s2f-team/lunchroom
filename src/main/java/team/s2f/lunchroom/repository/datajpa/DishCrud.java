@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Dish;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Transactional(readOnly = true)

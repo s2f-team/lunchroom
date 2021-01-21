@@ -7,9 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Restaurant;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Transactional(readOnly = true)
 public interface RestaurantCrud extends JpaRepository<Restaurant, Integer> {
     @Query("select r from Restaurant r where r.id=:id")

@@ -1,6 +1,5 @@
 package team.s2f.lunchroom;
 
-import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.model.Menu;
 
 import java.time.LocalDate;
@@ -17,8 +16,4 @@ public class MenuTestData {
     public static Menu getNew() {
         return new Menu(null, LocalDate.now(), null, RestaurantTestData.fish_house);
     }
-
-  /*  public static Dish getUpdated() {
-        return new Dish(DISH1_ID, "Updated Fish", 100, MenuTestData.menu_fish_house);
-    }*/
 }

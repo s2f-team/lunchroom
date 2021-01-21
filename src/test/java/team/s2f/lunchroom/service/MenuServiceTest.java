@@ -71,8 +71,4 @@ public class MenuServiceTest extends AbstractServiceTest {
     void getWithIncorrectDate() {
         Assertions.assertThrows(NotFoundException.class, () -> menuService.getByRestaurant(RestaurantTestData.NOT_FOUND, null));
     }
-
-    //  @Test
-    void getAllWithRestaurants() {
-    }
 }

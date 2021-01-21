@@ -1,11 +1,7 @@
 package team.s2f.lunchroom.web;
 
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -25,12 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringJUnitWebConfig(locations = {
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-mvc.xml",
-      //  "classpath:spring/spring-db.xml"
         "classpath:spring-db-test.xml"
 })
-//@WebAppConfiguration
-//@ExtendWith({SpringExtension.class})
-
 @Transactional
 public class AbstractControllerTest {
     private static final Locale RU_LOCALE = new Locale("ru");

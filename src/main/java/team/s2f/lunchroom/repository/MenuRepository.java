@@ -6,7 +6,6 @@ import team.s2f.lunchroom.model.Menu;
 import java.time.LocalDate;
 import java.util.List;
 
-
 public interface MenuRepository {
 
     @Transactional
@@ -21,5 +20,4 @@ public interface MenuRepository {
     List<Menu> getAll();
 
     List<Menu> getAllWithRestaurant(LocalDate date);
-
 }

@@ -44,7 +44,6 @@ public class DishRepositoryImpl implements DishRepository {
         return dishCrud.getByNameForMenu(name, menuId);
     }
 
-
     @Override
     public List<Dish> getAllByMenu(int menuId) {
         return dishCrud.getAll(menuId);

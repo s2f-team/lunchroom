@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
 })
-//@ExtendWith(SpringExtension.class)
 @Sql(scripts = "classpath:db/data.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ExtendWith(TimingExtension.class)
 public abstract class AbstractServiceTest {
