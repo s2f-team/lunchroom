@@ -13,7 +13,6 @@ import team.s2f.lunchroom.util.RestaurantUtil;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;

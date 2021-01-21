@@ -1,7 +1,10 @@
 ## Lunchroom
-TopJava internship graduation project.</br>
+TopJava internship graduation project.<br>
 It's a REST API using Hibernate/Spring/SpringMVC that implements a voting system for deciding where to have lunch.
 <br>
+<br>
+Api Documentation<br>
+http://localhost:8080/lunchroom/swagger-ui.html
 <br>
 
 ### Common:

@@ -7,7 +7,6 @@ import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.repository.RestaurantRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service

@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.repository.VoteRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -44,5 +43,4 @@ public class VoteRepositoryImpl implements VoteRepository {
     public List<Vote> getAll() {
         return voteCrud.findAll();
     }
-
 }

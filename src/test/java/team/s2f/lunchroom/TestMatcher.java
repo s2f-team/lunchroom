@@ -60,4 +60,3 @@ public class TestMatcher<T> {
         return result -> assertMatch(TestUtil.readListFromJsonMvcResult(result, clazz), expected);
     }
 }
-

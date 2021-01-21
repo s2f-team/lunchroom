@@ -1,13 +1,10 @@
 package team.s2f.lunchroom.util;
 
-import org.slf4j.Logger;
 import org.springframework.dao.DataAccessException;
 import team.s2f.lunchroom.HasId;
-import team.s2f.lunchroom.util.exception.ErrorType;
 import team.s2f.lunchroom.util.exception.IllegalRequestDataException;
 import team.s2f.lunchroom.util.exception.NotFoundException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.*;
 import java.util.Set;
 

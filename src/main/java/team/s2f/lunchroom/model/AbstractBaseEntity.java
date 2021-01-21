@@ -16,10 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @MappedSuperclass
 @Access(AccessType.FIELD)
-/*@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")*/
-//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+
 public abstract class AbstractBaseEntity implements HasId {
     public static final int START_SEQ = 100000;
 

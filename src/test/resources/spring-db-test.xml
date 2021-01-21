@@ -22,15 +22,6 @@
 
     <tx:annotation-driven/>
 
-   <!-- <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer"
-          init-method="start" destroy-method="stop" depends-on="h2WebServer">
-        <constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092"/>
-    </bean>
-    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer"
-          init-method="start" destroy-method="stop">
-        <constructor-arg value="-web,-webAllowOthers,-webPort,8082"/>
-    </bean>-->
-
     <jdbc:embedded-database id="dataSource" type="H2"/>
 
     <bean id="dataSource"
@@ -51,19 +42,6 @@
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}"
                        value="${hibernate.use_sql_comments}"/>
                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).JPA_PROXY_COMPLIANCE}" value="false"/>
-                <!--<entry key="#{T(org.hibernate.cfg.AvailableSettings).HBM2DDL_AUTO}" value="${hibernate.hbm2ddl.auto}"/>-->
-
-                <!--https://github.com/hibernate/hibernate-orm/blob/master/documentation/src/main/asciidoc/userguide/chapters/caching/Caching.adoc#caching-provider-jcache-->
-                <!-- <entry key="#{T(org.hibernate.cfg.AvailableSettings).CACHE_REGION_FACTORY}"
-                        value="org.hibernate.cache.jcache.internal.JCacheRegionFactory"/>
-                 <entry key="#{T(org.hibernate.cache.jcache.ConfigSettings).PROVIDER}"
-                        value="org.ehcache.jsr107.EhcacheCachingProvider"/>
-                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SECOND_LEVEL_CACHE}" value="true"/>
-                 <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_QUERY_CACHE}" value="false"/>-->
-
-                <!-- <entry key="javax.persistence.validation.group.pre-persist"
-                        value="ru.javawebinar.topjava.View$Persist"/>
-                 <entry key="javax.persistence.validation.group.pre-update" value="ru.javawebinar.topjava.View$Persist"/>-->
             </map>
         </property>
 
@@ -72,7 +50,6 @@
             </bean>
         </property>
     </bean>
-
 
     <!-- Transaction manager for a single JPA EntityManagerFactory (alternative to JTA) -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
@@ -85,5 +62,4 @@
         <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/lunchroom"/>
         <context:property-placeholder location="classpath:db/tomcat.properties" system-properties-mode="OVERRIDE"/>
     </beans>
-
 </beans>

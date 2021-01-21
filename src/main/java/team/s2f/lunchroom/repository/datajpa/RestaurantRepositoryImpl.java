@@ -1,13 +1,11 @@
 package team.s2f.lunchroom.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.repository.RestaurantRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository

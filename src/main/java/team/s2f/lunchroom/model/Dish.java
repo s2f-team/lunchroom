@@ -34,7 +34,6 @@ public class Dish extends AbstractBaseEntity {
     @JoinColumn(name = "menu_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
-    //  @NotNull
     private Menu menu;
 
     public Dish(String name, Integer price, Menu menu) {

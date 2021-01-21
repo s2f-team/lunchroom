@@ -21,5 +21,4 @@ public class VoteTestData {
     public static VoteTo getUpdated() {
         return new VoteTo(100006, 100011);
     }
-
 }

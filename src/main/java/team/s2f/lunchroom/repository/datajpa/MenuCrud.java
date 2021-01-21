@@ -21,7 +21,6 @@ public interface MenuCrud extends JpaRepository<Menu, Integer> {
     @Query("select m from Menu m where m.restaurant.id=:id and m.date=:date")
     Menu getByRestaurantId(@Param("id") int restaurantId, @Param("date")LocalDate date);
 
-    //  @EntityGraph(attributePaths = {"restaurants"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("select m from Menu m join fetch m.restaurant where m.date=:date")
     List<Menu> getAllWithRestaurant(@Param("date") LocalDate date);
 }
