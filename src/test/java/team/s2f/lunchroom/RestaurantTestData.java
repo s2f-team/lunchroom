@@ -20,6 +20,10 @@ public class RestaurantTestData {
         return new Restaurant(null, "New", "+7(000)975-46-23", "Moscow, Leskova, 27", "website");
     }
 
+    public static Restaurant getNewDuplicate() {
+        return new Restaurant(null, "Fish House", "+7(999)111-22-33", "Spb, Moskovskaya, 10", "www.new.ru");
+    }
+
     public static Restaurant getUpdated() {
         return new Restaurant(FISH_HOUSE_ID, "Updated", "+7(999)111-72-33", "Moscow, Leskova, 28", "website");
     }

@@ -16,4 +16,8 @@ public class MenuTestData {
     public static Menu getNew() {
         return new Menu(null, LocalDate.now(), null, RestaurantTestData.fish_house);
     }
+
+    public static Menu getDuplicate() {
+        return new Menu(null, LocalDate.now(), null, RestaurantTestData.fish_house);
+    }
 }

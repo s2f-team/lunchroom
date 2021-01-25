@@ -40,6 +40,7 @@ CREATE TABLE restaurant
     address VARCHAR(300) NOT NULL,
     website VARCHAR(100)
 );
+CREATE UNIQUE INDEX restaurant_unique_name_phone_idx ON restaurant (name, phone);
 
 CREATE TABLE menu
 (
@@ -48,6 +49,7 @@ CREATE TABLE menu
     rest_id INTEGER                      NOT NULL,
     FOREIGN KEY (rest_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX menu_unique_rest_created_idx ON menu (rest_id, created);
 
 CREATE TABLE dish
 (
@@ -57,6 +59,7 @@ CREATE TABLE dish
     menu_id INTEGER      NOT NULL,
     FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX dish_unique_menu_name_idx ON dish (name, menu_id);
 
 CREATE TABLE vote
 (
@@ -69,3 +72,4 @@ CREATE TABLE vote
     FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX vote_unique_user_created_idx ON vote (user_id, created);

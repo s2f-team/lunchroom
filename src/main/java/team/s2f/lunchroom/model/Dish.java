@@ -17,7 +17,8 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Entity
-@Table(name = "dish")
+@Table(name = "dish", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "menu_id"}, name = "dish_unique_menu_name_idx")})
+//CREATE UNIQUE INDEX dish_unique_menu_name_idx ON dish (name, menu_id);
 public class Dish extends AbstractBaseEntity {
 
     @Column(name = "name", nullable = false)

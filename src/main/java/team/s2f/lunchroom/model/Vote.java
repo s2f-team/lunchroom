@@ -8,6 +8,7 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +18,8 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Entity
-@Table(name = "vote")
+@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
+//CREATE UNIQUE INDEX vote_unique_user_created_idx ON vote (user_id, created);
 public class Vote extends AbstractBaseEntity {
     @Column(name = "created", nullable = false)
     @NotNull

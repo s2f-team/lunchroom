@@ -15,7 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "menu")
+@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"rest_id", "created"}, name = "menu_unique_rest_created_idx")})
+//CREATE UNIQUE INDEX menu_unique_rest_created_idx ON menu (rest_id, created);
 public class Menu extends AbstractBaseEntity implements HasId {
     @Column(name = "created", nullable = false)
     @NotNull

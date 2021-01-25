@@ -3,6 +3,8 @@ package team.s2f.lunchroom.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import team.s2f.lunchroom.RestaurantTestData;
 import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.util.exception.NotFoundException;
@@ -21,6 +23,11 @@ public class RestaurantServiceTest extends AbstractServiceTest {
         newRestaurant.setId(newId);
         RestaurantTestData.RESTAURANT_MATCHER.assertMatch(created, newRestaurant);
         RestaurantTestData.RESTAURANT_MATCHER.assertMatch(restaurantService.get(newId), newRestaurant);
+    }
+
+    @Test
+    void createDuplicate() {
+        Assertions.assertThrows(DataAccessException.class, () -> restaurantService.create(RestaurantTestData.getNewDuplicate()));
     }
 
     @Test
