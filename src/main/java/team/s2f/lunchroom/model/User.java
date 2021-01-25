@@ -40,7 +40,7 @@ public class User extends AbstractBaseEntity {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "created", nullable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     LocalDate registration;

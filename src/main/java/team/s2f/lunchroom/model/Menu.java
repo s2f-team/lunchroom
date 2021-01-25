@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "menu")
 public class Menu extends AbstractBaseEntity implements HasId {
-    @Column(name = "date", nullable = false)
+    @Column(name = "created", nullable = false)
     @NotNull
     private LocalDate date;
 

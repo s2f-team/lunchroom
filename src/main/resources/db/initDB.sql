@@ -19,7 +19,7 @@ CREATE TABLE users
     name     VARCHAR(25)                  NOT NULL,
     email    VARCHAR(100)                 NOT NULL,
     password VARCHAR(500)                 NOT NULL,
-    date     DATE    DEFAULT CURRENT_DATE NOT NULL,
+    created  DATE    DEFAULT CURRENT_DATE NOT NULL,
     enabled  BOOL    DEFAULT TRUE         NOT NULL
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
@@ -44,7 +44,7 @@ CREATE TABLE restaurant
 CREATE TABLE menu
 (
     id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
-    date    DATE    DEFAULT CURRENT_DATE NOT NULL,
+    created DATE    DEFAULT CURRENT_DATE NOT NULL,
     rest_id INTEGER                      NOT NULL,
     FOREIGN KEY (rest_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
@@ -60,11 +60,11 @@ CREATE TABLE dish
 
 CREATE TABLE vote
 (
-    id      INTEGER   DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
-    date    TIMESTAMP DEFAULT now() NOT NULL,
-    rest_id INTEGER                 NOT NULL,
-    menu_id INTEGER                 NOT NULL,
-    user_id INTEGER                 NOT NULL,
+    id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
+    created DATE    DEFAULT CURRENT_DATE NOT NULL,
+    rest_id INTEGER                      NOT NULL,
+    menu_id INTEGER                      NOT NULL,
+    user_id INTEGER                      NOT NULL,
     FOREIGN KEY (rest_id) REFERENCES restaurant (id) ON DELETE CASCADE,
     FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE

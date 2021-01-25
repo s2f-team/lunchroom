@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -18,9 +19,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "vote")
 public class Vote extends AbstractBaseEntity {
-    @Column(name = "date", nullable = false)
+    @Column(name = "created", nullable = false)
     @NotNull
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
     @Column(name = "user_id", nullable = false)
     @NotNull
@@ -36,12 +37,12 @@ public class Vote extends AbstractBaseEntity {
 
 
     public Vote(Integer userId, Integer restaurantId, Integer menuId) {
-        this(null, LocalDateTime.now(), userId, restaurantId, menuId);
+        this(null, LocalDate.now(), userId, restaurantId, menuId);
     }
 
-    public Vote(Integer id, LocalDateTime dateTime, Integer userId, Integer restaurantId, Integer menuId) {
+    public Vote(Integer id, LocalDate date, Integer userId, Integer restaurantId, Integer menuId) {
         super(id);
-        this.dateTime = dateTime;
+        this.date = date;
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.menuId = menuId;

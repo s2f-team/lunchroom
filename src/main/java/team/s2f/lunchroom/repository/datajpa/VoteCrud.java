@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Vote;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public interface VoteCrud extends JpaRepository<Vote, Integer> {
     @Query("select v from Vote v where v.id=:id and v.userId=:userId")
     Optional<Vote> findByIdAndUserId(@Param("id") int id, @Param("userId") int userId);
 
-    @Query("select v from Vote v where v.userId=:userId and v.dateTime>:date")
-    Optional<Vote> getByUserForToday(@Param("userId") int userId, @Param("date") LocalDateTime startOfDay);
+    @Query("select v from Vote v where v.userId=:userId and v.date=:date")
+    Optional<Vote> getByUserForToday(@Param("userId") int userId, @Param("date") LocalDate today);
+
 }

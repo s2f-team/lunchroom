@@ -34,10 +34,9 @@ public class VoteService {
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
 
-        LocalDateTime today = LocalDate.now().atStartOfDay();
-        Vote existing = voteRepository.getByUserForToday(userId, today);
+        Vote existing = voteRepository.getByUserForToday(userId, LocalDate.now());
         if (existing != null) {
-            if (vote.getDateTime().getHour() < 11) {
+            if (LocalTime.now().getHour() < 11) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);
@@ -62,16 +61,15 @@ public class VoteService {
         return voteRepository.getAll();
     }
 
-    //This method is just for testing
+    //This method is only for testing
     public Vote createOrUpdateJustForTest(VoteTo voteTo, int userId, LocalTime requestTime) {
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
-        vote.setDateTime(LocalDateTime.now().with(requestTime));
+        vote.setDate(LocalDate.now());
 
-        LocalDateTime today = LocalDate.now().atStartOfDay();
-        Vote existing = voteRepository.getByUserForToday(userId, today);
+        Vote existing = voteRepository.getByUserForToday(userId, LocalDate.now());
         if (existing != null) {
-            if (vote.getDateTime().getHour() < 11) {
+            if (requestTime.getHour() < 11) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);

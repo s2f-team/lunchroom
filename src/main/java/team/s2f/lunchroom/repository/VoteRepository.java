@@ -2,6 +2,7 @@ package team.s2f.lunchroom.repository;
 
 import team.s2f.lunchroom.model.Vote;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface VoteRepository {
 
     Vote get(int id, int userId);
 
-    Vote getByUserForToday(int userId, LocalDateTime startOfDay);
+    Vote getByUserForToday(int userId, LocalDate today);
 
     List<Vote> getAll();
 }

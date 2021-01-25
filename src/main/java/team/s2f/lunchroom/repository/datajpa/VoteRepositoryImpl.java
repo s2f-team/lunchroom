@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.repository.VoteRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,8 +36,8 @@ public class VoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
-    public Vote getByUserForToday(int userId, LocalDateTime startOfDay) {
-        return voteCrud.getByUserForToday(userId, startOfDay).orElse(null);
+    public Vote getByUserForToday(int userId, LocalDate today) {
+        return voteCrud.getByUserForToday(userId, LocalDate.now()).orElse(null);
     }
 
     @Override
