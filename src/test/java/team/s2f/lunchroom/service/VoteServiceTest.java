@@ -9,7 +9,6 @@ import team.s2f.lunchroom.dto.VoteTo;
 import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.util.VoteUtil;
 import team.s2f.lunchroom.util.exception.ApplicationException;
-import team.s2f.lunchroom.util.exception.NotFoundException;
 
 import java.time.LocalTime;
 
@@ -40,16 +39,5 @@ public class VoteServiceTest extends AbstractServiceTest {
     void updateAfter11Am() {
         VoteTo updated = VoteTestData.getUpdated();
         Assertions.assertThrows(ApplicationException.class, () -> voteService.createOrUpdateJustForTest(updated, UserTestData.USER_ID1, LocalTime.of(11,0)));
-    }
-
-    @Test
-    void delete() {
-        voteService.delete(100022, UserTestData.USER_ID1);
-        Assertions.assertThrows(NotFoundException.class, () -> voteService.get(100022, UserTestData.USER_ID1));
-    }
-
-    @Test
-    void deleteNotFound() {
-        Assertions.assertThrows(NotFoundException.class, () -> voteService.delete(100022, UserTestData.NOT_FOUND));
     }
 }

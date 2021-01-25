@@ -51,12 +51,7 @@ curl --location --request POST 'http://localhost:8080/lunchroom/rest/restaurants
 }'
 </pre>
 
-_Delete the vote:_
-<pre>
-curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/restaurants/votes/100024' \
---header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk' \
---data-raw ''
-</pre>
+
 <br>
 
 ### Admin (restaurants)
