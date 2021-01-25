@@ -1,10 +1,10 @@
 DROP SCHEMA IF EXISTS lunchroom;
 
-DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS dishes;
-DROP TABLE IF EXISTS votes;
+DROP TABLE IF EXISTS user_role;
+DROP TABLE IF EXISTS dish;
+DROP TABLE IF EXISTS vote;
 DROP TABLE IF EXISTS menu;
-DROP TABLE IF EXISTS restaurants;
+DROP TABLE IF EXISTS restaurant;
 DROP TABLE IF EXISTS users;
 
 CREATE SCHEMA lunchroom;
@@ -24,7 +24,7 @@ CREATE TABLE users
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 
-CREATE TABLE user_roles
+CREATE TABLE user_role
 (
     user_id INTEGER NOT NULL,
     role    VARCHAR,
@@ -32,7 +32,7 @@ CREATE TABLE user_roles
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
-CREATE TABLE restaurants
+CREATE TABLE restaurant
 (
     id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     name    VARCHAR(50)  NOT NULL,
@@ -46,10 +46,10 @@ CREATE TABLE menu
     id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     date    DATE    DEFAULT CURRENT_DATE NOT NULL,
     rest_id INTEGER                      NOT NULL,
-    FOREIGN KEY (rest_id) REFERENCES restaurants (id) ON DELETE CASCADE
+    FOREIGN KEY (rest_id) REFERENCES restaurant (id) ON DELETE CASCADE
 );
 
-CREATE TABLE dishes
+CREATE TABLE dish
 (
     id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     name    VARCHAR(100) NOT NULL,
@@ -58,14 +58,14 @@ CREATE TABLE dishes
     FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE
 );
 
-CREATE TABLE votes
+CREATE TABLE vote
 (
     id      INTEGER   DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     date    TIMESTAMP DEFAULT now() NOT NULL,
     rest_id INTEGER                 NOT NULL,
     menu_id INTEGER                 NOT NULL,
     user_id INTEGER                 NOT NULL,
-    FOREIGN KEY (rest_id) REFERENCES restaurants (id) ON DELETE CASCADE,
+    FOREIGN KEY (rest_id) REFERENCES restaurant (id) ON DELETE CASCADE,
     FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );

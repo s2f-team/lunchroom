@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Entity
-@Table(name = "votes")
+@Table(name = "vote")
 public class Vote extends AbstractBaseEntity {
     @Column(name = "date", nullable = false)
     @NotNull
