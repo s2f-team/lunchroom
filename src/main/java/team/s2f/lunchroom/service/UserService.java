@@ -1,5 +1,6 @@
 package team.s2f.lunchroom.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -16,21 +17,17 @@ import team.s2f.lunchroom.model.User;
 import team.s2f.lunchroom.repository.UserRepository;
 import team.s2f.lunchroom.util.UserUtil;
 import team.s2f.lunchroom.util.ValidationUtil;
+import team.s2f.lunchroom.util.exception.NotFoundException;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service("userService")
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
@@ -49,7 +46,8 @@ public class UserService implements UserDetailsService {
     }
 
     public void delete(int id) {
-        ValidationUtil.checkNotFoundWithId(userRepository.delete(id), id);
+    //    ValidationUtil.checkNotFoundWithId(userRepository.delete(id), id);
+        ValidationUtil.checkSingleModification(userRepository.delete(id), "User id=" + id + " missed.");
     }
 
     public User get(int id) {
@@ -62,12 +60,15 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getAll() {
-        return userRepository.getAll();
+        return userRepository.findAll();
     }
 
     @Transactional
     public void enable(int id, boolean enabled) {
-        User user = userRepository.getById(id);
+        User user = userRepository.getById(id).orElse(null);
+        if (user == null) {
+            throw new NotFoundException("User with id " + id + " doesn't exists.");
+        }
         user.setEnabled(enabled);
     }
 
@@ -84,4 +85,30 @@ public class UserService implements UserDetailsService {
     private User prepareAndSave(User user) {
         return userRepository.save(UserUtil.prepareToSave(user, passwordEncoder));
     }
+
+    /*  @Override
+    @Transactional
+    public User save(User user) {
+        return userCrud.save(user);
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return userCrud.delete(id) != 0;
+    }
+
+    @Override
+    public User getById(int id) {
+        return userCrud.findById(id).orElse(null);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userCrud.getByEmail(email);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userCrud.findAll();
+    }*/
 }

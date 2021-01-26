@@ -29,6 +29,4 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
 
     @Query("select v from Vote v where v.userId=:userId and v.date=:date")
     Optional<Vote> getByUserForToday(@Param("userId") int userId, @Param("date") LocalDate today);
-
-    List<Vote> findAll();
 }
