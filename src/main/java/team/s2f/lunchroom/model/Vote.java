@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+//@ToString
 @Entity
 @Table(name = "vote", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
 //CREATE UNIQUE INDEX vote_unique_user_created_idx ON vote (user_id, created);
@@ -48,5 +48,16 @@ public class Vote extends AbstractBaseEntity {
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.menuId = menuId;
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", date=" + date +
+                ", userId=" + userId +
+                ", restaurantId=" + restaurantId +
+                ", menuId=" + menuId +
+                '}';
     }
 }

@@ -64,8 +64,8 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
     p:entityManagerFactory-ref="entityManagerFactory"/>
 
-    <context:component-scan base-package="team.s2f.**.repository.datajpa"/>
-    <jpa:repositories base-package="team.s2f.**.repository.datajpa"/>
+    <context:component-scan base-package="team.s2f.**.repository"/>
+    <jpa:repositories base-package="team.s2f.**.repository"/>
 
     <beans profile="tomcat">
         <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/lunchroom"/>
