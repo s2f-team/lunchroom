@@ -3,7 +3,6 @@ package team.s2f.lunchroom.service;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.dto.VoteTo;
 import team.s2f.lunchroom.model.Vote;
@@ -34,7 +33,7 @@ public class VoteService {
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
 
-        Vote existing = voteRepository.getByUserForToday(userId, LocalDate.now()).orElse(null);
+        Vote existing = voteRepository.getFromUserFromDate(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
             if (LocalTime.now().getHour() < 11) {
                 vote.setId(existing.getId());
@@ -67,7 +66,7 @@ public class VoteService {
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
         vote.setDate(LocalDate.now());
 
-        Vote existing = voteRepository.getByUserForToday(userId, LocalDate.now()).orElse(null);
+        Vote existing = voteRepository.getFromUserFromDate(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
             if (requestTime.getHour() < 11) {
                 vote.setId(existing.getId());

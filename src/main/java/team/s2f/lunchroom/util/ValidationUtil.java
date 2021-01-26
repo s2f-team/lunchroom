@@ -6,6 +6,7 @@ import team.s2f.lunchroom.util.exception.IllegalRequestDataException;
 import team.s2f.lunchroom.util.exception.NotFoundException;
 
 import javax.validation.*;
+import java.util.Optional;
 import java.util.Set;
 
 public class ValidationUtil {
@@ -50,6 +51,14 @@ public class ValidationUtil {
         }
     }
 
+    public static <T> T checkNotFoundWithId(Optional<T> optional, int id) {
+        return checkNotFoundWithId(optional, "Not found entity with id=" + id);
+    }
+
+    public static <T> T checkNotFoundWithId(Optional<T> optional, String msg) {
+        return optional.orElseThrow(() -> new NotFoundException(msg));
+    }
+
     public static void checkNew(HasId bean) {
         if (!bean.isNew()) {
             throw new IllegalRequestDataException(bean + " must be new (id=null)");
@@ -86,5 +95,11 @@ public class ValidationUtil {
             result = cause;
         }
         return result;
+    }
+
+    public static void checkSingleModification(int count, String msg) {
+        if (count != 1) {
+            throw new NotFoundException(msg);
+        }
     }
 }

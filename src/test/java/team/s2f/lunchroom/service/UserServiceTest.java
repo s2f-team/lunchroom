@@ -95,4 +95,9 @@ public class UserServiceTest extends AbstractServiceTest {
         userService.enable(UserTestData.USER_ID1, true);
         Assertions.assertTrue(userService.get(UserTestData.USER_ID1).getEnabled());
     }
+
+    @Test
+    void enableNotFound(){
+        Assertions.assertThrows(NotFoundException.class, ()->userService.enable(UserTestData.NOT_FOUND, true));
+    }
 }

@@ -1,7 +1,7 @@
 package team.s2f.lunchroom.web.controllers.admin;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import team.s2f.lunchroom.model.Menu;
@@ -12,17 +12,13 @@ import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("rest/admin/menus")
 public class MenuRestController {
     private static final Logger log = getLogger(MenuRestController.class);
 
     private final MenuService menuService;
-
-    @Autowired
-    public MenuRestController(MenuService menuService) {
-        this.menuService = menuService;
-    }
 
     //Delete menu with dishes
     @DeleteMapping("/{id}")

@@ -84,7 +84,7 @@ public class DishServiceTest extends AbstractServiceTest {
 
     @Test
     void getAllByMenu() {
-        DishTestData.DISH_MATCHER.assertMatch(dishService.getAllByMenuId(MenuTestData.menu_fish_house.id()), DishTestData.getAllByMenu);
+        DishTestData.DISH_MATCHER.assertMatch(dishService.getAllByMenuId(MenuTestData.menu_fish_house.id()), DishTestData.dishes_fish_house);
     }
 
     @Test

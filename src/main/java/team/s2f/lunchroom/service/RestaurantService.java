@@ -1,6 +1,6 @@
 package team.s2f.lunchroom.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.model.Restaurant;
@@ -10,33 +10,30 @@ import team.s2f.lunchroom.util.ValidationUtil;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RestaurantService {
-    private final RestaurantRepository repository;
-
-    @Autowired
-    public RestaurantService(RestaurantRepository repository) {
-        this.repository = repository;
-    }
+    private final RestaurantRepository restaurantRepository;
 
     public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant, "Restaurant must not be null.");
-        return repository.save(restaurant);
+        return restaurantRepository.save(restaurant);
     }
 
     public Restaurant get(int id) {
-        return ValidationUtil.checkNotFoundWithId(repository.getById(id), id);
+        return ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(id), id);
     }
 
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "Restaurant must not be null.");
-        ValidationUtil.checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
+        ValidationUtil.checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
     }
 
     public void delete(int id) {
-        ValidationUtil.checkNotFoundWithId(repository.delete(id), id);
+     //   ValidationUtil.checkNotFoundWithId(restaurantRepository.delete(id), id);
+        ValidationUtil.checkSingleModification(restaurantRepository.delete(id), "Restaurant id=" + id + " missed.");
     }
 
     public List<Restaurant> getAll() {
-        return repository.getAll();
+        return restaurantRepository.findAll();
     }
 }
