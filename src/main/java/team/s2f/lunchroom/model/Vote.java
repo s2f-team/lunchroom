@@ -8,19 +8,22 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+//@ToString
 @Entity
-@Table(name = "votes")
+@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
+//CREATE UNIQUE INDEX vote_unique_user_created_idx ON vote (user_id, created);
 public class Vote extends AbstractBaseEntity {
-    @Column(name = "date", nullable = false)
+    @Column(name = "created", nullable = false)
     @NotNull
-    private LocalDateTime dateTime;
+    private LocalDate date;
 
     @Column(name = "user_id", nullable = false)
     @NotNull
@@ -36,14 +39,25 @@ public class Vote extends AbstractBaseEntity {
 
 
     public Vote(Integer userId, Integer restaurantId, Integer menuId) {
-        this(null, LocalDateTime.now(), userId, restaurantId, menuId);
+        this(null, LocalDate.now(), userId, restaurantId, menuId);
     }
 
-    public Vote(Integer id, LocalDateTime dateTime, Integer userId, Integer restaurantId, Integer menuId) {
+    public Vote(Integer id, LocalDate date, Integer userId, Integer restaurantId, Integer menuId) {
         super(id);
-        this.dateTime = dateTime;
+        this.date = date;
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.menuId = menuId;
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", date=" + date +
+                ", userId=" + userId +
+                ", restaurantId=" + restaurantId +
+                ", menuId=" + menuId +
+                '}';
     }
 }

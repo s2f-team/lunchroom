@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -14,7 +15,8 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "phone"}, name = "restaurant_unique_name_phone_idx")})
+//CREATE UNIQUE INDEX restaurant_unique_name_phone_idx ON restaurant (name, phone);
 public class Restaurant extends AbstractBaseEntity {
 
     @Column(name = "name", nullable = false)

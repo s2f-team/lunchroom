@@ -51,12 +51,7 @@ curl --location --request POST 'http://localhost:8080/lunchroom/rest/restaurants
 }'
 </pre>
 
-_Delete the vote:_
-<pre>
-curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/restaurants/votes/100024' \
---header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk' \
---data-raw ''
-</pre>
+
 <br>
 
 ### Admin (restaurants)
@@ -171,19 +166,19 @@ curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restau
 
 _Delete a menu with dishes:_
 <pre>
-curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/admin/restaurants/menu/100008' \
+curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/admin/menus/100008' \
 --header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
 </pre>
 
 _Get Menu with dishes by restaurantId:_
 <pre>
-curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restaurants/100006/menu' \
+curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/menus/byrestaurant?id=100003' \
 --header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
 </pre>
 
 _Get all Menu with dishes and restaurants by date:_
 <pre>
-curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restaurants/menu/by?date=2021-01-14' \
+curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/menus/by?date=2021-01-25' \
 --header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
 </pre>
 <br>

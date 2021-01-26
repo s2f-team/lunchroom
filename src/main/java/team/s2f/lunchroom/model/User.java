@@ -20,7 +20,8 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"}, name = "users_unique_email_idx")})
+//CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 public class User extends AbstractBaseEntity {
 
     @Column(name = "name", nullable = false)
@@ -40,7 +41,7 @@ public class User extends AbstractBaseEntity {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "created", nullable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     LocalDate registration;
@@ -49,7 +50,7 @@ public class User extends AbstractBaseEntity {
     Boolean enabled;
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique_idx")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)

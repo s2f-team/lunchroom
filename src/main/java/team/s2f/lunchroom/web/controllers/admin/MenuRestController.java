@@ -13,7 +13,7 @@ import java.util.List;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
-@RequestMapping("rest/admin/restaurants")
+@RequestMapping("rest/admin/menus")
 public class MenuRestController {
     private static final Logger log = getLogger(MenuRestController.class);
 
@@ -25,22 +25,23 @@ public class MenuRestController {
     }
 
     //Delete menu with dishes
-    @DeleteMapping("/menu/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
         log.info("Delete menu by id {}", id);
         menuService.delete(id);
     }
 
     //Get Menu with dishes by restaurantId
-    @GetMapping(value = "/{id}/menu", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Menu getWithDishesByRestaurantId(@PathVariable int id) {
-        log.info("Get menu with dishes by restaurant id {}.", id);
-        return menuService.getByRestaurant(id, LocalDate.now());
+    //Мне кажется, это не по REST!!
+    @GetMapping(value = "/byrestaurant", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Menu getWithDishesByRestaurantId(@RequestParam("id") int restaurantId) {
+        log.info("Get menu with dishes by restaurant id {}.", restaurantId);
+        return menuService.getByRestaurant(restaurantId, LocalDate.now());
     }
 
-    //Get Menu with dishes and restaurants by date
-    @GetMapping("/menu/by")
-    public List<Menu> getAllWithRestaurantsByDate(@RequestParam String date) {
+    //Get all menus with dishes and restaurants by date
+    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Menu> getAllWithRestaurantsByDate(@RequestParam("date") String date) {
         return menuService.getAllWithRestaurants(LocalDate.parse(date));
     }
 }

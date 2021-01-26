@@ -3,6 +3,7 @@ package team.s2f.lunchroom.service;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.dto.VoteTo;
 import team.s2f.lunchroom.model.Vote;
@@ -13,7 +14,6 @@ import team.s2f.lunchroom.util.exception.ApplicationException;
 import team.s2f.lunchroom.util.exception.ErrorType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -34,10 +34,9 @@ public class VoteService {
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
 
-        LocalDateTime today = LocalDate.now().atStartOfDay();
-        Vote existing = voteRepository.getByUserForToday(userId, today);
+        Vote existing = voteRepository.getByUserForToday(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
-            if (vote.getDateTime().getHour() < 11) {
+            if (LocalTime.now().getHour() < 11) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);
@@ -55,23 +54,22 @@ public class VoteService {
     }
 
     public Vote get(int id, int userId) {
-        return ValidationUtil.checkNotFoundWithId(voteRepository.get(id, userId), id);
+        return ValidationUtil.checkNotFoundWithId(voteRepository.findByIdAndUserId(id, userId), id);
     }
 
     public List<Vote> getAll() {
-        return voteRepository.getAll();
+        return voteRepository.findAll();
     }
 
-    //This method is just for testing
+    //This method is only for testing
     public Vote createOrUpdateJustForTest(VoteTo voteTo, int userId, LocalTime requestTime) {
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
-        vote.setDateTime(LocalDateTime.now().with(requestTime));
+        vote.setDate(LocalDate.now());
 
-        LocalDateTime today = LocalDate.now().atStartOfDay();
-        Vote existing = voteRepository.getByUserForToday(userId, today);
+        Vote existing = voteRepository.getByUserForToday(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
-            if (vote.getDateTime().getHour() < 11) {
+            if (requestTime.getHour() < 11) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);

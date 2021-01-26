@@ -2,9 +2,11 @@ package team.s2f.lunchroom.web.controllers;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import team.s2f.lunchroom.dto.VoteTo;
 import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.service.VoteService;
@@ -30,13 +32,5 @@ public class CommonVoteRestController {
     public Vote vote(@RequestBody VoteTo voteTo) {
         int userId = SecurityUtil.authUserId();
         return voteService.createOrUpdate(voteTo, userId);
-    }
-
-    //Delete vote
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        int userId = SecurityUtil.authUserId();
-        voteService.delete(id, userId);
     }
 }
