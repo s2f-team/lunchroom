@@ -1,5 +1,6 @@
 package team.s2f.lunchroom.web.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,17 +15,13 @@ import team.s2f.lunchroom.web.SecurityUtil;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("rest/restaurants/votes")
 public class CommonVoteRestController {
     private static final Logger log = getLogger(CommonVoteRestController.class);
 
     private final VoteService voteService;
-
-    @Autowired
-    public CommonVoteRestController(VoteService voteService) {
-        this.voteService = voteService;
-    }
 
     //Vote
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,

@@ -1,11 +1,10 @@
 package team.s2f.lunchroom.web.controllers.user;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.*;
@@ -21,17 +20,13 @@ import java.net.URI;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/rest/profile")
 public class ProfileRestController {
     private static final Logger log = getLogger(ProfileRestController.class);
 
     private final UserService userService;
-
-    @Autowired
-    public ProfileRestController(UserService userService) {
-        this.userService = userService;
-    }
 
     //Register new user
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)

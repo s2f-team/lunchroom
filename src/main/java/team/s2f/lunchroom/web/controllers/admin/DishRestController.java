@@ -1,7 +1,7 @@
 package team.s2f.lunchroom.web.controllers.admin;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
@@ -10,7 +10,6 @@ import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.service.DishService;
 import team.s2f.lunchroom.service.MenuService;
-import team.s2f.lunchroom.service.RestaurantService;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import javax.validation.Valid;
@@ -19,6 +18,7 @@ import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/rest/admin/restaurants/{restaurantId}/menu/{menuId}/dishes")
 public class DishRestController {
@@ -26,12 +26,6 @@ public class DishRestController {
 
     private final DishService dishService;
     private final MenuService menuService;
-
-    @Autowired
-    public DishRestController(DishService dishService, MenuService menuService, RestaurantService restaurantService) {
-        this.dishService = dishService;
-        this.menuService = menuService;
-    }
 
     //Create new dish
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

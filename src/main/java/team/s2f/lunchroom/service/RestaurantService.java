@@ -1,7 +1,6 @@
 package team.s2f.lunchroom.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.model.Restaurant;
@@ -37,31 +36,4 @@ public class RestaurantService {
     public List<Restaurant> getAll() {
         return restaurantRepository.findAll();
     }
-
-    /*
-    *   @Override
-    @Transactional
-    public Restaurant save(Restaurant restaurant) {
-        return restaurantCrud.save(restaurant);
-    }
-
-    @Override
-    public boolean delete(int id) {
-        return restaurantCrud.delete(id) != 0;
-    }
-
-    @Override
-    public Restaurant getOne(int id) {
-        return restaurantCrud.getOne(id);
-    }
-
-    @Override
-    public Restaurant getById(Integer id) {
-        return restaurantCrud.getById(id);
-    }
-
-    @Override
-    public List<Restaurant> getAll() {
-        return restaurantCrud.findAll();
-    }*/
 }

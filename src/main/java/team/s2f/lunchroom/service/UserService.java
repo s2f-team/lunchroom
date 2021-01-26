@@ -1,7 +1,6 @@
 package team.s2f.lunchroom.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -85,30 +84,4 @@ public class UserService implements UserDetailsService {
     private User prepareAndSave(User user) {
         return userRepository.save(UserUtil.prepareToSave(user, passwordEncoder));
     }
-
-    /*  @Override
-    @Transactional
-    public User save(User user) {
-        return userCrud.save(user);
-    }
-
-    @Override
-    public boolean delete(int id) {
-        return userCrud.delete(id) != 0;
-    }
-
-    @Override
-    public User getById(int id) {
-        return userCrud.findById(id).orElse(null);
-    }
-
-    @Override
-    public User getByEmail(String email) {
-        return userCrud.getByEmail(email);
-    }
-
-    @Override
-    public List<User> getAll() {
-        return userCrud.findAll();
-    }*/
 }

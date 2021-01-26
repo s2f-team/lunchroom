@@ -1,7 +1,7 @@
 package team.s2f.lunchroom.web.controllers.admin;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -12,17 +12,13 @@ import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/rest/admin/users")
 public class UserRestController {
     private static final Logger log = getLogger(UserRestController.class);
 
     private final UserService userService;
-
-    @Autowired
-    public UserRestController(UserService userService) {
-        this.userService = userService;
-    }
 
     //Get all users
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

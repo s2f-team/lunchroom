@@ -1,7 +1,7 @@
 package team.s2f.lunchroom.web.controllers.admin;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("rest/admin/restaurants")
 public class RestaurantRestController {
@@ -24,12 +25,6 @@ public class RestaurantRestController {
 
     private final RestaurantService restaurantService;
     private final VoteService voteService;
-
-    @Autowired
-    public RestaurantRestController(RestaurantService restaurantService, VoteService voteService) {
-        this.restaurantService = restaurantService;
-        this.voteService = voteService;
-    }
 
     //Create new restaurant
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
