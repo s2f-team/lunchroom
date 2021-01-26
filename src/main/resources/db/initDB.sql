@@ -66,10 +66,8 @@ CREATE TABLE vote
     id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     created DATE    DEFAULT CURRENT_DATE NOT NULL,
     rest_id INTEGER                      NOT NULL,
-    menu_id INTEGER                      NOT NULL,
     user_id INTEGER                      NOT NULL,
     FOREIGN KEY (rest_id) REFERENCES restaurant (id) ON DELETE CASCADE,
-    FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX vote_unique_user_created_idx ON vote (user_id, created);

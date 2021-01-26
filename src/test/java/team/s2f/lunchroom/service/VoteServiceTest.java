@@ -3,13 +3,9 @@ package team.s2f.lunchroom.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import team.s2f.lunchroom.DishTestData;
-import team.s2f.lunchroom.MenuTestData;
 import team.s2f.lunchroom.UserTestData;
 import team.s2f.lunchroom.VoteTestData;
 import team.s2f.lunchroom.dto.VoteTo;
-import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.util.VoteUtil;
 import team.s2f.lunchroom.util.exception.ApplicationException;
@@ -50,10 +46,4 @@ public class VoteServiceTest extends AbstractServiceTest {
         Vote actual = voteService.get(VoteTestData.VOTE_USER1_ID, UserTestData.USER_ID1);
         VoteTestData.VOTE_MATCHER.assertMatch(actual, VoteTestData.vote_user1);
     }
-
-   /* @Test
-    void get() {
-        Dish actual = dishService.get(DishTestData.DISH1_ID, MenuTestData.menu_fish_house.id());
-        DishTestData.DISH_MATCHER.assertMatch(actual, DishTestData.dish1);
-    }*/
 }
