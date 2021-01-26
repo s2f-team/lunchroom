@@ -1,22 +1,20 @@
 package team.s2f.lunchroom.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.Hibernate;
+import org.springframework.util.Assert;
 import team.s2f.lunchroom.HasId;
 
 import javax.persistence.*;
 
-/*@ToString, @EqualsAndHashCode,
-@Getter on all fields, @Setter on all non-final fields,
-@RequiredArgsConstructor! */
-@Data
+
 @NoArgsConstructor
 @MappedSuperclass
 @Access(AccessType.FIELD)
-
+@Getter
+@Setter
 public abstract class AbstractBaseEntity implements HasId {
     public static final int START_SEQ = 100000;
 
@@ -27,5 +25,33 @@ public abstract class AbstractBaseEntity implements HasId {
 
     public AbstractBaseEntity(Integer id) {
         this.id = id;
+    }
+
+    // doesn't work for hibernate lazy proxy
+    public int id() {
+        Assert.notNull(id, "Entity must have id");
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ":" + id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
+            return false;
+        }
+        AbstractBaseEntity that = (AbstractBaseEntity) o;
+        return id != null && id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id == null ? 0 : id;
     }
 }

@@ -55,7 +55,7 @@ CREATE TABLE dish
 (
     id      INTEGER DEFAULT GLOBAL_SEQ.nextval PRIMARY KEY,
     name    VARCHAR(100) NOT NULL,
-    price   INTEGER      NOT NULL,
+    price   DOUBLE      NOT NULL,
     menu_id INTEGER      NOT NULL,
     FOREIGN KEY (menu_id) REFERENCES menu (id) ON DELETE CASCADE
 );

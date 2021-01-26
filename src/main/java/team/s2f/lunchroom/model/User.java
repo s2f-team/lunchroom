@@ -21,7 +21,6 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"}, name = "users_unique_email_idx")})
-//CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 public class User extends AbstractBaseEntity {
 
     @Column(name = "name", nullable = false)

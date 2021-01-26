@@ -94,10 +94,9 @@ public class DishServiceTest extends AbstractServiceTest {
 
     @Test
     void createWithException() {
-        validateRootCause(() -> dishService.create(new Dish(null, " ", 100, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
-        validateRootCause(() -> dishService.create(new Dish(null, null, 100, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
-        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 3, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
-        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 550, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
-        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 550, null), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, " ", 100.00, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, null, 100.00, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 3.00, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
+        validateRootCause(() -> dishService.create(new Dish(null, "Milk", 2000.00, MenuTestData.menu_fish_house), MenuTestData.menu_fish_house.id()), ConstraintViolationException.class);
     }
 }
