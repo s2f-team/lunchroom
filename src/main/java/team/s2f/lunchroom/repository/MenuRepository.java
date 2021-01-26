@@ -17,9 +17,6 @@ import java.util.Optional;
 public interface MenuRepository extends JpaRepository<Menu, Integer> {
 
     @Transactional
-    Menu save(Menu menu);
-
-    @Transactional
     @Modifying
     @Query("delete from Menu m where m.id=:id")
     int delete(@Param("id") int id);
@@ -27,7 +24,7 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
     Optional<Menu> getById(int id);
 
     @Query("select m from Menu m where m.restaurant.id=:id and m.date=:date")
-    Menu getByRestaurantId(@Param("id") int restaurantId, @Param("date")LocalDate date);
+    Menu getByRestaurantIdAndDate(@Param("id") int restaurantId, @Param("date")LocalDate date);
 
     @Query("select m from Menu m join fetch m.restaurant where m.date=:date")
     List<Menu> getAllWithRestaurant(@Param("date") LocalDate date);

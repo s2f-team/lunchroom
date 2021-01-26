@@ -1,7 +1,6 @@
 package team.s2f.lunchroom.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -32,7 +31,7 @@ public class MenuService {
     }
 
     public Menu getByRestaurant(int restaurantId, LocalDate date) {
-        return ValidationUtil.checkNotFoundWithId(menuRepository.getByRestaurantId(restaurantId, date), restaurantId);
+        return ValidationUtil.checkNotFoundWithId(menuRepository.getByRestaurantIdAndDate(restaurantId, date), restaurantId);
     }
 
     public List<Menu> getAllWithRestaurants(LocalDate date) {

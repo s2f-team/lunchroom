@@ -14,8 +14,6 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface DishRepository extends JpaRepository<Dish, Integer> {
-    @Transactional
-    Dish save(Dish dish);
 
     @Transactional
     @Modifying
@@ -23,11 +21,11 @@ public interface DishRepository extends JpaRepository<Dish, Integer> {
     int delete(@Param("id") int id, @Param("menuId") int menuId);
 
     @Query("select d from Dish d where d.id=:id and d.menu.id=:menuId")
-  Optional<Dish> findById(@Param("id") int id, @Param("menuId") int menuId);
+    Optional<Dish> findById(@Param("id") int id, @Param("menuId") int menuId);
 
     @Query("select d from Dish d where d.name=:name and d.menu.id=:id")
     Dish getByNameForMenu(@Param("name") String name, @Param("id") int menuId);
 
-    @Query("select d from Dish d where d.menu.id=:menuId order by d.id")
+    @Query("select d from Dish d where d.menu.id=:menuId order by d.name")
     List<Dish> getAll(@Param("menuId") int menuId);
 }
