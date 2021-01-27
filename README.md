@@ -164,6 +164,12 @@ curl --location --request GET 'http://localhost:8080/lunchroom/rest/admin/restau
 
 ### Admin (menus)
 
+_Create a menu:_
+<pre>
+curl --location --request POST 'http://localhost:8080/lunchroom/rest/admin/restaurants/100007/menus' \
+--header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk'
+</pre>
+
 _Delete a menu with dishes:_
 <pre>
 curl --location --request DELETE 'http://localhost:8080/lunchroom/rest/admin/menus/100008' \

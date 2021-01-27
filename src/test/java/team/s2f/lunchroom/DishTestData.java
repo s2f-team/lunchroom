@@ -27,7 +27,7 @@ public class DishTestData {
     public static final List<Dish> dishes_masterskaya = List.of(dish4, dish5, dish6);
 
     public static Dish getNew() {
-        return new Dish(null, "New dish", 100.00, MenuTestData.menu_fish_house);
+        return new Dish(null, "New dish", 100.00, null);
     }
 
     public static Dish getNewDuplicated() {

@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.service.MenuService;
+import team.s2f.lunchroom.service.RestaurantService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,11 +15,20 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("rest/admin/menus")
+@RequestMapping(value = "rest/admin/restaurants/{restaurantId}/menus", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuRestController {
     private static final Logger log = getLogger(MenuRestController.class);
 
     private final MenuService menuService;
+    private final RestaurantService restaurantService;
+
+    //Create menu
+    @PostMapping()
+    public Menu create(@PathVariable("restaurantId") int restaurantId) {
+        Menu menu = new Menu(restaurantService.getOne(restaurantId));
+        log.info("Create new menu for restaurant id {} {}.", restaurantId, LocalDate.now());
+        return menuService.create(menu, restaurantId);
+    }
 
     //Delete menu with dishes
     @DeleteMapping("/{id}")
@@ -29,14 +39,14 @@ public class MenuRestController {
 
     //Get Menu with dishes by restaurantId
     //Мне кажется, это не по REST!!
-    @GetMapping(value = "/byrestaurant", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Menu getWithDishesByRestaurantId(@RequestParam("id") int restaurantId) {
+    @GetMapping(value = "/byrestaurant")
+    public Menu getWithDishesByRestaurantId(@PathVariable("restaurantId") int restaurantId) {
         log.info("Get menu with dishes by restaurant id {}.", restaurantId);
         return menuService.getByRestaurant(restaurantId, LocalDate.now());
     }
 
     //Get all menus with dishes and restaurants by date
-    @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/by")
     public List<Menu> getAllWithRestaurantsByDate(@RequestParam("date") String date) {
         return menuService.getAllWithRestaurants(LocalDate.parse(date));
     }

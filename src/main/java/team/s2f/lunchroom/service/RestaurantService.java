@@ -19,18 +19,21 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant get(int id) {
-        return ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(id), id);
-    }
-
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "Restaurant must not be null.");
         ValidationUtil.checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
     }
 
     public void delete(int id) {
-     //   ValidationUtil.checkNotFoundWithId(restaurantRepository.delete(id), id);
         ValidationUtil.checkSingleModification(restaurantRepository.delete(id), "Restaurant id=" + id + " missed.");
+    }
+
+    public Restaurant getOne(int id){
+        return ValidationUtil.checkNotFoundWithId(restaurantRepository.getOne(id), id);
+    }
+
+    public Restaurant get(int id) {
+        return ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(id), id);
     }
 
     public List<Restaurant> getAll() {

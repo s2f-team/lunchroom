@@ -22,6 +22,8 @@ import static team.s2f.lunchroom.util.ValidationUtil.checkNotFoundWithId;
 @Service
 public class VoteService {
     private static final Logger log = getLogger(VoteService.class);
+    private static final LocalTime endOfVoting = LocalTime.of(11, 0);
+
     private final VoteRepository voteRepository;
 
     @Autowired
@@ -35,7 +37,7 @@ public class VoteService {
 
         Vote existing = voteRepository.getFromUserFromDate(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
-            if (LocalTime.now().getHour() < 11) {
+            if (LocalTime.now().isBefore(endOfVoting)) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);
@@ -68,7 +70,7 @@ public class VoteService {
 
         Vote existing = voteRepository.getFromUserFromDate(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
-            if (requestTime.getHour() < 11) {
+            if (requestTime.isBefore(endOfVoting)) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);

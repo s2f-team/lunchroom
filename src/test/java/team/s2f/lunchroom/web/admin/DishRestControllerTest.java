@@ -115,6 +115,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
                 .with(TestUtil.userHttpBasic(UserTestData.admin)));
 
         Dish created = TestUtil.readFromJson(action, Dish.class);
+        System.out.println(created);
         int newId = created.id();
 
         newDish.setId(newId);
