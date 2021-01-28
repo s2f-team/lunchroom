@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import team.s2f.lunchroom.util.ValidationUtil;
-import team.s2f.lunchroom.util.exception.ErrorInfo;
-import team.s2f.lunchroom.util.exception.ErrorType;
-import team.s2f.lunchroom.util.exception.IllegalRequestDataException;
-import team.s2f.lunchroom.util.exception.NotFoundException;
+import team.s2f.lunchroom.util.exception.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,7 +25,7 @@ public class ExceptionInfoHandler {
     private static Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
     //  http://stackoverflow.com/a/22358422/548473
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY) //422
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorInfo> handleError(HttpServletRequest req, NotFoundException e) {
         return logAndGetErrorInfo(req, e, false, ErrorType.DATA_NOT_FOUND);
@@ -38,6 +35,12 @@ public class ExceptionInfoHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorInfo> conflict(HttpServletRequest req, DataIntegrityViolationException e) {
         return logAndGetErrorInfo(req, e, true, ErrorType.DATA_ERROR);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_MODIFIED)  // 304
+    @ExceptionHandler(DuplicateVoteException.class)
+    public ResponseEntity<ErrorInfo> duplicateVote(HttpServletRequest req, DuplicateVoteException e) {
+        return logAndGetErrorInfo(req, e, false, ErrorType.DUPLICATE_VOTE);
     }
 
     @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422

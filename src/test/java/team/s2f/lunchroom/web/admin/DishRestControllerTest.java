@@ -27,7 +27,6 @@ public class DishRestControllerTest extends AbstractControllerTest {
     @Autowired
     private DishService dishService;
 
-
     @Test
     void getByUser() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + "100003/menu/100008/dishes/" + DISH1_ID)
