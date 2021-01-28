@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 
 public class VoteUtil {
     public static Vote createNewFromTo(VoteTo voteTo, int userId) {
-        return new Vote(null, LocalDate.now(), userId, voteTo.getRestaurantId(), voteTo.getMenuId());
+        return new Vote(null, LocalDate.now(), userId, voteTo.getRestaurantId());
     }
 }

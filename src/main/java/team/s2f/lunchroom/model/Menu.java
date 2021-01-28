@@ -16,35 +16,24 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "menu", uniqueConstraints = {@UniqueConstraint(columnNames = {"rest_id", "created"}, name = "menu_unique_rest_created_idx")})
-//CREATE UNIQUE INDEX menu_unique_rest_created_idx ON menu (rest_id, created);
 public class Menu extends AbstractBaseEntity implements HasId {
     @Column(name = "created", nullable = false)
     @NotNull
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
     @JsonManagedReference
     private List<Dish> dishes;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rest_id")
     private Restaurant restaurant;
 
-    public Menu(LocalDate date) {
-        this(null, date, null);
+    public Menu(Restaurant restaurant) {
+        this(null, LocalDate.now(), null, restaurant);
     }
 
-    public Menu(LocalDate date, Restaurant restaurant) {
-        this(null, date, null, restaurant);
-    }
-
-    public Menu(Integer id, LocalDate date, List<Dish> dishes) {
-        super(id);
-        this.date = date;
-        this.dishes = dishes;
-    }
-
-    public Menu(Integer id, LocalDate date, List<Dish> dishes, Restaurant restaurant) {
+    public Menu(Integer id, @NotNull LocalDate date, List<Dish> dishes, Restaurant restaurant) {
         super(id);
         this.date = date;
         this.dishes = dishes;
@@ -57,7 +46,6 @@ public class Menu extends AbstractBaseEntity implements HasId {
                 "id=" + id +
                 ", date=" + date +
                 ", dishes=" + dishes +
-                ", restaurant=" + restaurant +
                 '}';
     }
 }

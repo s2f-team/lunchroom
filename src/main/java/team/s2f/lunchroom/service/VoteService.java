@@ -1,15 +1,18 @@
 package team.s2f.lunchroom.service;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.dto.VoteTo;
 import team.s2f.lunchroom.model.Vote;
+import team.s2f.lunchroom.repository.RestaurantRepository;
 import team.s2f.lunchroom.repository.VoteRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
 import team.s2f.lunchroom.util.VoteUtil;
 import team.s2f.lunchroom.util.exception.ApplicationException;
+import team.s2f.lunchroom.util.exception.DuplicateVoteException;
 import team.s2f.lunchroom.util.exception.ErrorType;
 
 import java.time.LocalDate;
@@ -20,28 +23,28 @@ import static org.slf4j.LoggerFactory.getLogger;
 import static team.s2f.lunchroom.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
+@RequiredArgsConstructor
 public class VoteService {
     private static final Logger log = getLogger(VoteService.class);
-    private final VoteRepository voteRepository;
+    private static final LocalTime endOfVoting = LocalTime.of(11, 0);
 
-    @Autowired
-    public VoteService(VoteRepository voteRepository) {
-        this.voteRepository = voteRepository;
-    }
+    private final VoteRepository voteRepository;
+    private final RestaurantRepository restaurantRepository;
 
     public Vote createOrUpdate(VoteTo voteTo, int userId) {
+        ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(voteTo.getRestaurantId()), voteTo.getRestaurantId());
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
 
         Vote existing = voteRepository.getFromUserFromDate(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
-            if (LocalTime.now().getHour() < 11) {
+            if (LocalTime.now().isBefore(endOfVoting)) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);
             } else {
                 log.info("It's too late to voting.");
-                throw new ApplicationException("It's too late to voting.", ErrorType.DUPLICATE_VOTE);
+                throw new DuplicateVoteException("It's too late to voting.");
             }
         }
         log.info("New vote {} by user {}.", vote, userId);
@@ -62,19 +65,20 @@ public class VoteService {
 
     //This method is only for testing
     public Vote createOrUpdateJustForTest(VoteTo voteTo, int userId, LocalTime requestTime) {
+        ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(voteTo.getRestaurantId()), voteTo.getRestaurantId());
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = VoteUtil.createNewFromTo(voteTo, userId);
         vote.setDate(LocalDate.now());
 
         Vote existing = voteRepository.getFromUserFromDate(userId, LocalDate.now()).orElse(null);
         if (existing != null) {
-            if (requestTime.getHour() < 11) {
+            if (requestTime.isBefore(endOfVoting)) {
                 vote.setId(existing.getId());
                 log.info("Change vote {} by user {} for today.", vote, userId);
                 return voteRepository.save(vote);
             } else {
                 log.info("It's too late to voting.");
-                throw new ApplicationException("It's too late to voting.", ErrorType.DUPLICATE_VOTE);
+                throw new DuplicateVoteException("It's too late to voting.");
             }
         }
         log.info("New vote {} by user {}.", vote, userId);

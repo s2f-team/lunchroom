@@ -27,7 +27,6 @@ public class DishRestControllerTest extends AbstractControllerTest {
     @Autowired
     private DishService dishService;
 
-
     @Test
     void getByUser() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + "100003/menu/100008/dishes/" + DISH1_ID)
@@ -94,7 +93,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     void updateInvalid() throws Exception {
-        Dish invalid = new Dish(DISH1_ID, null, 0, MenuTestData.menu_fish_house);
+        Dish invalid = new Dish(DISH1_ID, null, 0.00, MenuTestData.menu_fish_house);
 
         perform(MockMvcRequestBuilders.put(REST_URL + "100003/menu/100008/dishes/" + DISH1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -115,6 +114,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
                 .with(TestUtil.userHttpBasic(UserTestData.admin)));
 
         Dish created = TestUtil.readFromJson(action, Dish.class);
+        System.out.println(created);
         int newId = created.id();
 
         newDish.setId(newId);
@@ -124,7 +124,7 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     void createInvalid() throws Exception {
-        Dish invalid = new Dish(null, null, 0, null);
+        Dish invalid = new Dish(null, null, 0.00, null);
 
         perform(MockMvcRequestBuilders.post(REST_URL + "100003/menu/100008/dishes/")
                 .contentType(MediaType.APPLICATION_JSON)

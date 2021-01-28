@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
@@ -18,7 +19,6 @@ import javax.validation.constraints.Size;
 @Setter
 @Entity
 @Table(name = "dish", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "menu_id"}, name = "dish_unique_menu_name_idx")})
-//CREATE UNIQUE INDEX dish_unique_menu_name_idx ON dish (name, menu_id);
 public class Dish extends AbstractBaseEntity {
 
     @Column(name = "name", nullable = false)
@@ -28,20 +28,20 @@ public class Dish extends AbstractBaseEntity {
 
     @Column(name = "price", nullable = false)
     @NotNull
-    @Range(min = 10, max = 500)
-    private Integer price;
+    @Range(min = 10, max = 1000)
+    private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
     private Menu menu;
 
-    public Dish(String name, Integer price, Menu menu) {
+    public Dish(String name, Double price, Menu menu) {
         this(null, name, price, menu);
     }
 
-    public Dish(Integer id, String name, Integer price, Menu menu) {
+    public Dish(Integer id, String name, Double price, Menu menu) {
         super(id);
         this.name = name;
         this.price = price;
