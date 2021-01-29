@@ -3,6 +3,7 @@ package team.s2f.lunchroom.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import team.s2f.lunchroom.dto.RestaurantTo;
 import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.repository.RestaurantRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
@@ -28,7 +29,7 @@ public class RestaurantService {
         ValidationUtil.checkSingleModification(restaurantRepository.delete(id), "Restaurant id=" + id + " missed.");
     }
 
-    public Restaurant getOne(int id){
+    public Restaurant getOne(int id) {
         return ValidationUtil.checkNotFoundWithId(restaurantRepository.getOne(id), id);
     }
 
@@ -38,5 +39,9 @@ public class RestaurantService {
 
     public List<Restaurant> getAll() {
         return restaurantRepository.findAll();
+    }
+
+    public List<RestaurantTo> getAllWithCount() {
+        return restaurantRepository.getAllWithCount();
     }
 }

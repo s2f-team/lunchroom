@@ -4,13 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.service.DishService;
 import team.s2f.lunchroom.service.MenuService;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -26,10 +29,16 @@ public class DishRestController {
     //Create new dish
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public Dish create(@Valid @RequestBody Dish dish, @PathVariable Integer restaurantId, @PathVariable Integer menuId) {
+    public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish, @PathVariable Integer restaurantId, @PathVariable Integer menuId) {
         ValidationUtil.checkNew(dish);
         log.info("Create new dish {} for menu {}", dish, menuId);
-        return dishService.create(dish, menuId);
+        Dish created = dishService.create(dish, menuId);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/rest/admin/restaurants/{restaurantId}/menu/{menuId}/dishes/{id}")
+                .buildAndExpand(restaurantId, menuId, created.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     //Update dish id {}

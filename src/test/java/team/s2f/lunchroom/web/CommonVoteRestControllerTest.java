@@ -89,18 +89,7 @@ public class CommonVoteRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().is(304))
                 .andExpect(errorType(ErrorType.DUPLICATE_VOTE));
-
     }
-
-    /*
-    *  Dish updated = getUpdated();
-        perform(MockMvcRequestBuilders.put(REST_URL + "100003/menu/100008/dishes/" + DISH1_ID).contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated))
-                .with(TestUtil.userHttpBasic(UserTestData.admin)))
-                .andExpect(status().isNoContent());
-
-        DISH_MATCHER.assertMatch(dishService.get(DISH1_ID, MenuTestData.MENU_FISH_HOUSE_ID), updated);*/
-
 
     @Test
     void updateInvalid() throws Exception {

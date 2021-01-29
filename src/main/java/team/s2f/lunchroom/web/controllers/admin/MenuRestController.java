@@ -2,12 +2,16 @@ package team.s2f.lunchroom.web.controllers.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import team.s2f.lunchroom.model.Menu;
 import team.s2f.lunchroom.service.MenuService;
 import team.s2f.lunchroom.service.RestaurantService;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,7 +19,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "rest/admin/restaurants/{restaurantId}/menus", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/rest/admin/restaurants/{restaurantId}/menus", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MenuRestController {
     private static final Logger log = getLogger(MenuRestController.class);
 
@@ -24,11 +28,33 @@ public class MenuRestController {
 
     //Create menu
     @PostMapping()
-    public Menu create(@PathVariable("restaurantId") int restaurantId) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Menu> create(@PathVariable("restaurantId") int restaurantId) {
         Menu menu = new Menu(restaurantService.getOne(restaurantId));
         log.info("Create new menu for restaurant id {} {}.", restaurantId, LocalDate.now());
-        return menuService.create(menu, restaurantId);
+        Menu created = menuService.create(menu, restaurantId);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/rest/admin/restaurants/{restaurantId}/menus/{id}")
+                .buildAndExpand(restaurantId, created.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
+
+    /*
+    *   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish, @PathVariable Integer restaurantId, @PathVariable Integer menuId) {
+        ValidationUtil.checkNew(dish);
+        log.info("Create new dish {} for menu {}", dish, menuId);
+        Dish created = dishService.create(dish, menuId);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/rest/admin/restaurants/{restaurantId}/menu/{menuId}/dishes/{id}")
+                .buildAndExpand(restaurantId, menuId, created.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
+    }*/
 
     //Delete menu with dishes
     @DeleteMapping("/{id}")

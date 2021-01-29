@@ -4,22 +4,24 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import team.s2f.lunchroom.dto.RestaurantTo;
 import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.service.RestaurantService;
 import team.s2f.lunchroom.service.VoteService;
-import team.s2f.lunchroom.util.RestaurantUtil;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("rest/admin/restaurants")
+@RequestMapping("/rest/admin/restaurants")
 public class RestaurantRestController {
     private static final Logger log = getLogger(RestaurantRestController.class);
 
@@ -28,10 +30,17 @@ public class RestaurantRestController {
 
     //Create new restaurant
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Restaurant create(@Valid @RequestBody Restaurant restaurant) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Restaurant> createWithLocation(@Valid @RequestBody Restaurant restaurant) {
         ValidationUtil.checkNew(restaurant);
         log.info("Create new restaurant - {}.", restaurant);
-        return restaurantService.create(restaurant);
+        Restaurant created = restaurantService.create(restaurant);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/rest/admin/restaurants/{id}")
+                .buildAndExpand(created.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     //Update restaurant by id
@@ -67,6 +76,6 @@ public class RestaurantRestController {
     //Get restaurantId and votes count
     @GetMapping(value = "/votes", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getWithVotes() {
-        return RestaurantUtil.getTos(voteService.getAll(), restaurantService.getAll());
+        return restaurantService.getAllWithCount();
     }
 }
