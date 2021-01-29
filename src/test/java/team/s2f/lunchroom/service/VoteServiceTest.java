@@ -8,7 +8,6 @@ import team.s2f.lunchroom.VoteTestData;
 import team.s2f.lunchroom.dto.VoteTo;
 import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.util.VoteUtil;
-import team.s2f.lunchroom.util.exception.ApplicationException;
 import team.s2f.lunchroom.util.exception.DuplicateVoteException;
 
 import java.time.LocalTime;

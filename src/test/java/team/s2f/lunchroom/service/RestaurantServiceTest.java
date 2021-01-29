@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import team.s2f.lunchroom.RestaurantTestData;
 import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.util.exception.NotFoundException;

@@ -45,7 +45,6 @@ public class UserService implements UserDetailsService {
     }
 
     public void delete(int id) {
-    //    ValidationUtil.checkNotFoundWithId(userRepository.delete(id), id);
         ValidationUtil.checkSingleModification(userRepository.delete(id), "User id=" + id + " missed.");
     }
 

@@ -2,7 +2,6 @@ package team.s2f.lunchroom.service;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import team.s2f.lunchroom.dto.VoteTo;
@@ -11,9 +10,7 @@ import team.s2f.lunchroom.repository.RestaurantRepository;
 import team.s2f.lunchroom.repository.VoteRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
 import team.s2f.lunchroom.util.VoteUtil;
-import team.s2f.lunchroom.util.exception.ApplicationException;
 import team.s2f.lunchroom.util.exception.DuplicateVoteException;
-import team.s2f.lunchroom.util.exception.ErrorType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
