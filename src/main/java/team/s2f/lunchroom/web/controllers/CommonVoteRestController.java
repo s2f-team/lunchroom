@@ -27,7 +27,7 @@ public class CommonVoteRestController {
     //Create new vote
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Vote> create(@RequestBody VoteTo voteTo) {
+    public ResponseEntity<Vote> createToWithLocation(@RequestBody VoteTo voteTo) {
         int userId = SecurityUtil.authUserId();
         Vote created = voteService.createOrUpdate(voteTo, userId);
 

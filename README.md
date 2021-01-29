@@ -1,4 +1,5 @@
 ## Lunchroom
+
 TopJava internship graduation project.<br>
 It's a REST API using Hibernate/Spring/SpringMVC that implements a voting system for deciding where to have lunch.
 <br>
@@ -28,7 +29,8 @@ Build a voting system for deciding where to have lunch.
 
 Each restaurant provides a new menu each day.
 
-As a result, provide a link to github repository. It should contain the code, README.md with API documentation and couple curl commands to test it.
+As a result, provide a link to github repository. It should contain the code, README.md with API documentation and
+couple curl commands to test it.
 
 ---
 
@@ -46,9 +48,8 @@ curl --location --request POST 'http://localhost:8080/lunchroom/rest/restaurants
 --header 'Authorization: Basic M0BtYWlsLnJ1OnBhc3N3b3Jk' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"restaurantId": 100003,
-"menuId": 100008
-}'
+        "restaurantId": 100003
+    }'
 </pre>
 
 
