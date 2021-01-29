@@ -111,7 +111,9 @@ public class DishRestControllerTest extends AbstractControllerTest {
         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + "100003/menu/100008/dishes/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(newDish))
-                .with(TestUtil.userHttpBasic(UserTestData.admin)));
+                .with(TestUtil.userHttpBasic(UserTestData.admin)))
+                .andDo(print())
+                .andExpect(status().is(201));
 
         Dish created = TestUtil.readFromJson(action, Dish.class);
         System.out.println(created);

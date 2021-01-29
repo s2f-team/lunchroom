@@ -30,6 +30,10 @@ public class MenuService {
 
     }
 
+    public Menu get(int id) {
+        return ValidationUtil.checkNotFoundWithId(menuRepository.findById(id), id);
+    }
+
     public Menu getByRestaurant(int restaurantId, LocalDate date) {
         return ValidationUtil.checkNotFoundWithId(menuRepository.getByRestaurantIdAndDate(restaurantId, date), restaurantId);
     }
