@@ -9,6 +9,9 @@ import team.s2f.lunchroom.repository.MenuRepository;
 import team.s2f.lunchroom.repository.RestaurantRepository;
 import team.s2f.lunchroom.util.ValidationUtil;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,15 +22,16 @@ public class MenuService {
     private final RestaurantRepository restaurantRepository;
 
     @Transactional
+    @CacheEvict(value = "menus", allEntries = true)
     public Menu create(Menu menu, int restaurantId) {
         Assert.notNull(menu, "Menu must not be null.");
         ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(restaurantId), restaurantId);
         return save(menu, restaurantId);
     }
 
+    @CacheEvict(value = "menus", allEntries = true)
     public void delete(int id) {
         ValidationUtil.checkSingleModification(menuRepository.delete(id), "Menu id=" + id + " missed.");
-
     }
 
     public Menu get(int id) {
@@ -38,10 +42,10 @@ public class MenuService {
         return ValidationUtil.checkNotFoundWithId(menuRepository.getByRestaurantIdAndDate(restaurantId, date), restaurantId);
     }
 
+    @Cacheable("menus")
     public List<Menu> getAllWithRestaurants(LocalDate date) {
         return menuRepository.getAllWithRestaurant(date);
     }
-
 
     Menu save(Menu menu, int restaurantId) {
         if (!menu.isNew()) {
