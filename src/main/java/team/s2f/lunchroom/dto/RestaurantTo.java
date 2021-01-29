@@ -15,9 +15,9 @@ import java.io.Serializable;
 public class RestaurantTo extends BaseTo implements HasId, Serializable {
     private static final long serialVersionUID = 1L;
 
-    long votesCount;
+    Long votesCount;
 
-    public RestaurantTo(Integer id, long votesCount) {
+    public RestaurantTo(Integer id, Long votesCount) {
         super(id);
         this.votesCount = votesCount;
     }

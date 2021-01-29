@@ -9,7 +9,6 @@ import team.s2f.lunchroom.dto.RestaurantTo;
 import team.s2f.lunchroom.model.Restaurant;
 import team.s2f.lunchroom.service.RestaurantService;
 import team.s2f.lunchroom.service.VoteService;
-import team.s2f.lunchroom.util.RestaurantUtil;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import javax.validation.Valid;
@@ -67,6 +66,6 @@ public class RestaurantRestController {
     //Get restaurantId and votes count
     @GetMapping(value = "/votes", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RestaurantTo> getWithVotes() {
-        return RestaurantUtil.getTos(voteService.getAll(), restaurantService.getAll());
+        return restaurantService.getAllWithCount();
     }
 }
