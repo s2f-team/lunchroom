@@ -37,7 +37,7 @@ public class ExceptionInfoHandler {
         return logAndGetErrorInfo(req, e, true, ErrorType.DATA_ERROR);
     }
 
-    @ResponseStatus(HttpStatus.NOT_MODIFIED)  // 304
+    @ResponseStatus(HttpStatus.ACCEPTED) //202
     @ExceptionHandler(DuplicateVoteException.class)
     public ResponseEntity<ErrorInfo> duplicateVote(HttpServletRequest req, DuplicateVoteException e) {
         return logAndGetErrorInfo(req, e, false, ErrorType.DUPLICATE_VOTE);

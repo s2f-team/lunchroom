@@ -12,6 +12,7 @@ import team.s2f.lunchroom.model.Vote;
 import team.s2f.lunchroom.service.VoteService;
 import team.s2f.lunchroom.web.SecurityUtil;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -27,7 +28,7 @@ public class CommonVoteRestController {
     //Create new vote
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Vote> createToWithLocation(@RequestBody VoteTo voteTo) {
+    public ResponseEntity<Vote> createToWithLocation(@Valid @RequestBody VoteTo voteTo) {
         int userId = SecurityUtil.authUserId();
         Vote created = voteService.createOrUpdate(voteTo, userId);
 
@@ -41,7 +42,7 @@ public class CommonVoteRestController {
     //Update vote
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody VoteTo voteTo) {
+    public void update( @Valid @RequestBody VoteTo voteTo) {
         int userId = SecurityUtil.authUserId();
         voteService.createOrUpdate(voteTo, userId);
     }
