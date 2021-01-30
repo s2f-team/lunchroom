@@ -41,21 +41,6 @@ public class MenuRestController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    /*
-    *   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish, @PathVariable Integer restaurantId, @PathVariable Integer menuId) {
-        ValidationUtil.checkNew(dish);
-        log.info("Create new dish {} for menu {}", dish, menuId);
-        Dish created = dishService.create(dish, menuId);
-
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/rest/admin/restaurants/{restaurantId}/menu/{menuId}/dishes/{id}")
-                .buildAndExpand(restaurantId, menuId, created.getId()).toUri();
-
-        return ResponseEntity.created(uriOfNewResource).body(created);
-    }*/
-
     //Delete menu with dishes
     @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {

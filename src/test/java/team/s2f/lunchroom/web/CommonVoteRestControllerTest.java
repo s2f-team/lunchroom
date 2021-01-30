@@ -71,20 +71,6 @@ public class CommonVoteRestControllerTest extends AbstractControllerTest {
                 .andExpect(errorType(ErrorType.DATA_NOT_FOUND));
     }
 
-    //test only after 11AM
-   /* @Test
-    void updateAfter11() throws Exception {
-        VoteTo updated = VoteTestData.getUpdated();
-
-        perform(MockMvcRequestBuilders.put(COMMON_VOTE_REST_URL)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated))
-                .with(TestUtil.userHttpBasic(UserTestData.admin)))
-                .andDo(print())
-                .andExpect(status().is(202))
-                .andExpect(errorType(ErrorType.DUPLICATE_VOTE));
-    }*/
-
     @Test
     void updateInvalid() throws Exception {
         ResultActions action = perform(MockMvcRequestBuilders.post(COMMON_VOTE_REST_URL)

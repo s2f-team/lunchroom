@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import team.s2f.lunchroom.model.Dish;
 import team.s2f.lunchroom.service.DishService;
-import team.s2f.lunchroom.service.MenuService;
 import team.s2f.lunchroom.util.ValidationUtil;
 
 import javax.validation.Valid;
